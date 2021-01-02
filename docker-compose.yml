@@ -1,5 +1,15 @@
 version: "3.4"
 services:
+  client:
+      container_name: client
+      restart: always
+      build: ./client
+      ports:
+        - ${CLIENT_PORT}:${CLIENT_PORT}
+      networks:
+        - app-network
+      environment:
+        - PORT=${CLIENT_PORT}
 
 networks:
   app-network:

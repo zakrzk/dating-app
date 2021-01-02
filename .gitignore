@@ -1,4 +1,6 @@
 client/node_modules
+server/node_modules
+
 .idea/modules.xml
 .idea/dating-app.iml
 .idea/codeStyles/codeStyleConfig.xml
