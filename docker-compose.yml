@@ -23,8 +23,10 @@ services:
       - app-network
     environment:
       - SERVER_PORT=${SERVER_PORT}
+    links:
+      - database
 
-  sql:
+  database:
     container_name: sql
     image: mysql:8.0.21
     command: --default-authentication-plugin=mysql_native_password

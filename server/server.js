@@ -1,15 +1,22 @@
+import {getTestMessage} from "./controllers/getTestMessage.controller.js";
+import sequelize from "sequelize";
+
 const express = require('express')
 const app = express()
-const port = process.env.SERVER_PORT
+const PORT = process.env.SERVER_PORT
 
 app.get('/test', (req, res) => {
     res.json({ message: 'This message comes from the server-container. (API Request)' })
 })
 
-app.get('/database', (req, res) => {
+app.get('/database', [], getTestMessage)
 
-})
-
-app.listen(port, () => {
-    console.log(`Server's running at http://localhost:${port}`)
-})
+sequelize
+    .sync()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server's running at http://localhost:${PORT}`)
+        });
+    }).catch(err => {
+    console.log(err)
+});

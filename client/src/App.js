@@ -7,8 +7,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <TestAPI></TestAPI>
-        <TestDatabase></TestDatabase>
-
       </header>
     </div>
   );
