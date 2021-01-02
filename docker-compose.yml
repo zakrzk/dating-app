@@ -1,15 +1,43 @@
 version: "3.4"
 services:
   client:
-      container_name: client
-      restart: always
-      build: ./client
-      ports:
-        - ${CLIENT_PORT}:${CLIENT_PORT}
-      networks:
-        - app-network
-      environment:
-        - PORT=${CLIENT_PORT}
+    container_name: client
+    restart: always
+    build: ./client
+    ports:
+      - ${CLIENT_PORT}:3001
+    networks:
+      - app-network
+    environment:
+      - PORT=${CLIENT_PORT}
+    links:
+      - server
+
+  server:
+    container_name: server
+    restart: always
+    build: ./server
+    ports:
+      - ${SERVER_PORT}:3006
+    networks:
+      - app-network
+    environment:
+      - SERVER_PORT=${SERVER_PORT}
+
+  sql:
+    container_name: sql
+    image: mysql:8.0.21
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - ${DATABSE_PORT}:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    networks:
+      - app-network
 
 networks:
   app-network:
