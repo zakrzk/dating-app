@@ -1,0 +1,15 @@
+.header {
+    border-bottom: 2px solid #dadada;
+    display: flex;
+    justify-content: space-between;
+}
+.header__settingsIcon,
+.header__chatIcon,
+.header__logoIcon{
+    color: #4f4f4f;
+    padding: 20px;
+    transform: scale(1.5);
+}
+.header__logoIcon {
+    color: #441596;
+}

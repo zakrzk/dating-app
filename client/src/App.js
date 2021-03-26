@@ -1,20 +1,29 @@
 import './App.css';
-import {TestAPI} from "./components/TestAPI";
 import 'fontsource-roboto';
-import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
-
 import {Header} from "./components/Header";
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import Card from "./components/Card";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        {/*<TestAPI></TestAPI>*/}
-          <Header/>
+    return (
+        <div className="App">
+            <Header/>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/profile">
+                        <h2>My Profile</h2>
+                    </Route>
+                    <Route path="/chat">
+                        <h2>Chat</h2>
+                    </Route>
+                    <Route path="/">
+                        <Card/>
+                    </Route>
+                </Switch>
+            </BrowserRouter>
 
-      </header>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default App;

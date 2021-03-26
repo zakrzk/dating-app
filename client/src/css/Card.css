@@ -1,0 +1,16 @@
+.card {
+    margin: 0 auto;
+    width: 70vw;
+    background-color: #dadada;
+    height: 70vw;
+    border: 2px solid blue;
+    margin-bottom: 30px;
+    border-radius: 20px;
+}
+
+.card__name {
+    font-size: 30px;
+}
+.card__level{
+    font-size: 18px;
+}
