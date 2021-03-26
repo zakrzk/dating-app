@@ -1,6 +1,5 @@
 import './App.css';
 import {TestAPI} from "./components/TestAPI";
-import {TestDatabase} from "./components/TestDatabase";
 
 function App() {
   return (
