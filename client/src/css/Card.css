@@ -1,16 +1,54 @@
 .card {
-    margin: 0 auto;
     width: 70vw;
-    background-color: #dadada;
+    max-width: 550px;
+    max-height: 550px;
     height: 70vw;
-    border: 2px solid blue;
+    background-color: #dadada;
+    box-shadow: 5px 5px 15px 5px rgb(102, 102, 102, 0.55);
+    margin: 0 auto;
     margin-bottom: 30px;
-    border-radius: 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .card__name {
+    text-align: left;
     font-size: 30px;
 }
+
 .card__level{
+    border: 1px solid red;
+    border-radius: 50%;
+    width: 20vw;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 200px;
+    max-height: 200px;
+    height: 20vh;
     font-size: 18px;
+
+
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+
+}
+.card__wrapper{
+    display: flex;
+    justify-content: center;
+}
+.swipe{
+    position: absolute;
+}
+.card__name {
+    position: absolute;
+    top: 80%;
+    text-align: center;
+    transform: translateX(-50%);
+    color: white;
+
 }
