@@ -129,7 +129,7 @@ export const interests = {
         },
         {
             label: 'music',
-            symbol: '🎹',
+            symbol: '🎵',
         },
         {
             label: 'Electronic',
