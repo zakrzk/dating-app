@@ -112,7 +112,7 @@ export default function Register() {
                             >
                                 <MenuItem disabled value="default">Select gender</MenuItem>
                                 {genderOptions.standard.map(gender => (
-                                    <MenuItem value={gender.value}>{gender.label}</MenuItem>
+                                    <MenuItem key={gender} value={gender.value}>{gender.label}</MenuItem>
                                 ))}
                             </Select>
                         </Grid>

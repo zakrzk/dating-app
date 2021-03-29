@@ -1,30 +1,29 @@
-import "../../css/Footer.css"
-
-import React, {Component} from 'react';
+import React, {Component, useRef} from 'react';
 import {Chip} from "@material-ui/core";
 import Emoji from "a11y-react-emoji";
 
-const handleDelete = () => {
-    console.info('You clicked the delete icon.');
-};
 
-const handleClick = (event) => {
-    event.target.style.backgroundColor = 'lightGreen'
-    console.log(event.target)
-};
+function Hobby (props) {
+    const inputEl = useRef(null)
 
-export class Hobby extends Component {
-    render() {
+    const handleClick = (event) => {
+        inputEl.current.style.backgroundColor = 'lightGreen'
+        console.log(event.target)
+        console.log( inputEl.current)
+    };
         return (
             <div className="interests__chip">
                 <Chip
-                    icon={<Emoji className="interests__emoji" symbol={this.props.symbol} label={this.props.label}/>}
-                    label={this.props.label}
+                    ref={inputEl}
+                    icon={<Emoji className="interests__emoji" symbol={props.symbol} label={props.label}/>}
+                    label={props.label}
                     clickable
                     onClick={handleClick}
+                    style={{textTransform: 'capitalize'}}
                 />
             </div>
 
         );
-    }
 }
+
+export default Hobby;
