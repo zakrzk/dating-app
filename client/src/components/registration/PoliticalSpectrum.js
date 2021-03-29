@@ -2,21 +2,20 @@ import "../../css/registration/PoliticalSpectrum.css"
 
 import React, {Component} from 'react';
 import {FormLabel, Slider} from "@material-ui/core";
-
-
+import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
 
 const marks = {
-    economics : [
-            {
-                value: -5,
-                label: 'Equality',
-            },
-            {
-                value: 5,
-                label: 'Markets',
-            }
+    economics: [
+        {
+            value: -5,
+            label: 'Equality',
+        },
+        {
+            value: 5,
+            label: 'Markets',
+        }
     ],
-    diplomatic : [
+    diplomatic: [
 
         {
             value: -5,
@@ -27,7 +26,7 @@ const marks = {
             label: 'World',
         }
     ],
-    civil : [
+    civil: [
 
         {
             value: -5,
@@ -38,7 +37,7 @@ const marks = {
             label: 'Authority',
         }
     ],
-    societal : [
+    societal: [
 
         {
             value: -5,
@@ -64,10 +63,16 @@ export class PoliticalSpectrum extends Component {
 
 
                 <FormLabel component="legend" style={{padding: '8px 0'}}>
-                   Your political spectrum
+                    Your political spectrum
                 </FormLabel>
 
                 <h4>Economic Axis</h4>
+                <p><FormatQuoteIcon/>Those with higher Equality scores believe the economy should distribute value evenly among the
+                    populace. They tend to support progressive tax codes, social programs, and at high values,
+                    socialism.</p>
+                <p>Those with higher Market scores believe the economy should be focused on rapid growth. <br/> They
+                    tend to
+                    support lower taxes, privatization, deregulation, and at high values, laissez-faire capitalism.<FormatQuoteIcon/></p>
                 <Slider
                     defaultValue={0}
                     getAriaValueText={valuetext}
@@ -80,6 +85,16 @@ export class PoliticalSpectrum extends Component {
                 />
 
                 <h4>Diplomatic Axis</h4>
+                <p>Those with higher Nation scores are patriotic and nationalist. They often believe in an aggressive
+                    foreign policy, valuing the military, strength, sovereignty, and at high values, territorial
+                    expansion.
+                </p>
+                <p>Those with higher Globe scores are cosmopolitan and globalist. They often believe in a peaceful
+                    foreign policy, emphasizing diplomacy, cooperation, integration, and at high values, a world
+                    government.
+
+                </p>
+
                 <Slider
                     defaultValue={0}
                     getAriaValueText={valuetext}
@@ -93,6 +108,14 @@ export class PoliticalSpectrum extends Component {
                 />
 
                 <h4>Civil Axis</h4>
+                <p>Those with higher Liberty scores believe in strong civil liberties. They tend to support democracy
+                    and oppose state intervention in personal lives. Note that this refers to civil liberties, not
+                    economic liberties.
+                </p>
+                <p>Those with higher Authority scores believe in strong state power. They tend to support state
+                    intervention in personal lives, government surveillance, and at high values, censorship or
+                    autocracy.
+                </p>
                 <Slider
                     defaultValue={0}
                     getAriaValueText={valuetext}
@@ -106,6 +129,10 @@ export class PoliticalSpectrum extends Component {
                 />
 
                 <h4>Societal Axis</h4>
+                <p>Those with higher Tradition scores believe in traditional values and strict adherence to a moral code. Though not always, they are usually religious, and support the status quo or the status quo ante.
+                </p>
+                <p>Those with higher Progress scores believe in social change and rationality. Though not always, they are usually secular or atheist, and support environmental action and scientific or technological research.
+                </p>
                 <Slider
                     defaultValue={0}
                     getAriaValueText={valuetext}
@@ -118,6 +145,8 @@ export class PoliticalSpectrum extends Component {
 
                 />
 
+                <p style={{fontSize: '11px', textAlign:'right'}}>Source of the definitions: <a target="_blank" href="https://8values.github.io/">https://8values.github.io</a>
+                </p>
 
             </div>
 
