@@ -4,6 +4,7 @@ import {Header} from "./components/Header";
 import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import Card from "./components/Card";
 import Register from "./components/Register";
+import {Footer} from "./components/Footer";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     </Route>
                 </Switch>
             </BrowserRouter>
+            <Footer/>
 
         </div>
     );

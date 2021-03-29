@@ -10,34 +10,21 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
-import { genderOptions } from 'gender-options';
+import {genderOptions} from 'gender-options';
 
 import '../css/Register.css';
-import {MenuItem, Select} from "@material-ui/core";
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import {FormControl, FormLabel, MenuItem, Radio, RadioGroup, Select} from "@material-ui/core";
+import {Interests} from "./registration/Interests";
 
 export default function Register() {
 
-    const [gender, setGender] = React.useState('');
+    const [gender, setGender] = React.useState('default');
     const handleGenderChange = (event) => {
-
         setGender(event.target.value);
     };
-    const [sexOrientation, setsSxOrientation] = React.useState('');
-    const handleSexOrientation = (event) => {
 
+    const [sexOrientation, setsSxOrientation] = React.useState('all');
+    const handleSexOrientation = (event) => {
         setsSxOrientation(event.target.value);
     };
 
@@ -45,7 +32,7 @@ export default function Register() {
         <Container component="main" maxWidth="xs">
             <div className="register__paper">
                 <Avatar className="register__avatar">
-                    <CreateIcon />
+                    <CreateIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign up now
@@ -58,7 +45,7 @@ export default function Register() {
                         fontStyle: 'italic',
                         fontSize: '12pt',
                         paddingTop: '5px'
-                            }}
+                    }}
 
                 >
                     let the algorithm do its magic ✨
@@ -116,31 +103,54 @@ export default function Register() {
 
                         <Grid item xs={12}>
                             <Select
+                                variant="outlined"
+                                style={{width: '100%'}}
                                 labelId="gender-select"
                                 id="gender-select"
                                 value={gender}
                                 onChange={handleGenderChange}
                             >
+                                <MenuItem disabled value="default">Select gender</MenuItem>
                                 {genderOptions.standard.map(gender => (
                                     <MenuItem value={gender.value}>{gender.label}</MenuItem>
                                 ))}
                             </Select>
+                        </Grid>
+
+
+                        <Grid item xs={12}>
+
+                            <FormControl
+                                variant="outlined"
+                                component="fieldset"
+                            >
+                                <FormLabel component="legend" style={{padding:'5px 0'}}>Show me</FormLabel>
+
+                                <RadioGroup aria-label="sex-orientation-select" name="sex-orientation-select"
+                                            value={sexOrientation} onChange={handleSexOrientation}>
+                                    <FormControlLabel value="all" control={<Radio/>} label="All"/>
+                                    <FormControlLabel value="women" control={<Radio/>} label="Only women"/>
+                                    <FormControlLabel value="men" control={<Radio/>} label="Only men"/>
+                                </RadioGroup>
+                            </FormControl>
+
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Select
-                                labelId="sex-orientation-select"
-                                id="sex-orientation-select"
-                                value={sexOrientation}
-                                onChange={handleSexOrientation}
-                            >
-                                {genderOptions.standard.map(gender => (
-                                    <MenuItem value={gender.value}>{gender.label}</MenuItem>
-                                ))}
-                            </Select>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="profession"
+                                label="Profession"
+                                name="profession"
+                                autoComplete="profession"
+                            />
                         </Grid>
 
-
+                        <Grid item xs={12}>
+                            <Interests/>
+                        </Grid>
 
                     </Grid>
                     <Button
@@ -161,9 +171,6 @@ export default function Register() {
                     </Grid>
                 </form>
             </div>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
         </Container>
     );
 }
