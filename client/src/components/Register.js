@@ -124,7 +124,7 @@ export default function Register() {
                                 variant="outlined"
                                 component="fieldset"
                             >
-                                <FormLabel component="legend" style={{padding:'5px 0'}}>Show me</FormLabel>
+                                <FormLabel component="legend" style={{padding: '5px 0'}}>Show me</FormLabel>
 
                                 <RadioGroup aria-label="sex-orientation-select" name="sex-orientation-select"
                                             value={sexOrientation} onChange={handleSexOrientation}>

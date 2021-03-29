@@ -6,7 +6,10 @@
     min-height: 30px;
     margin: 5px 0;
     padding: 0 5px;
-    float: left;
+}
+.interests__group {
+    display: flex;
+    flex-wrap: wrap;
 }
 .interests__title {
     display: block;
