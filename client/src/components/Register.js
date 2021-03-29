@@ -13,6 +13,7 @@ import {genderOptions} from 'gender-options';
 import '../css/Register.css';
 import {FormControl, FormLabel, MenuItem, Radio, RadioGroup, Select} from "@material-ui/core";
 import {Interests} from "./registration/Interests";
+import {PoliticalSpectrum} from "./registration/PoliticalSpectrum";
 
 export default function Register() {
 
@@ -148,6 +149,10 @@ export default function Register() {
 
                         <Grid item xs={12}>
                             <Interests/>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <PoliticalSpectrum/>
                         </Grid>
 
                     </Grid>

@@ -14,7 +14,7 @@ function Hobby(props) {
         } else {
             inputEl.current.setAttribute('isclicked', "true");
             inputEl.current.style.backgroundColor = '#87d37c'
-            inputEl.current.style.color = 'white'
+            inputEl.current.style.color = '#fafafa'
         }
         console.log(event.target)
         console.log(inputEl.current)

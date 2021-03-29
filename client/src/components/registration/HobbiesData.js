@@ -145,7 +145,7 @@ export const interests = {
         },
         {
             label: 'Journalism',
-            symbol: '🔖',
+            symbol: '📓',
         },
         {
             label: 'Plants',

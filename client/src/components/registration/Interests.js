@@ -11,15 +11,22 @@ export class Interests extends Component {
     render() {
         return (
             <div>
-                <FormLabel component="legend" style={{padding: '8px 0'}}>Select your hobbies</FormLabel>
+                <FormLabel component="legend" style={{padding: '8px 0'}}>
+                    Select your favourites
+                </FormLabel>
 
                 {Object.keys(interests).map((categoryName, index)=> (
                     <div key={index}>
                         <Typography
-                            style={{textTransform: 'capitalize'}}
+                            style={{
+                                textTransform: 'capitalize',
+                                margin: '10px 0'
+                            }}
                             variant="h6"
                             key={categoryName}
-                            component="h6"> {categoryName}
+                            component="h6"
+                        >
+                            {categoryName}
                         </Typography>
                         <div
                             key={index}
