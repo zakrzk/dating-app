@@ -17,17 +17,9 @@ export class Interests extends Component {
 
                 {Object.keys(interests).map((categoryName, index)=> (
                     <div key={index}>
-                        <Typography
-                            style={{
-                                textTransform: 'capitalize',
-                                margin: '10px 0'
-                            }}
-                            variant="h6"
-                            key={categoryName}
-                            component="h6"
-                        >
-                            {categoryName}
-                        </Typography>
+                        <FormLabel component="legend" style={{padding: '8px 0', fontSize: '16px',textTransform:'capitalize'}}>
+                        {categoryName}
+                        </FormLabel>
                         <div
                             key={index}
                             className="interests__group">
