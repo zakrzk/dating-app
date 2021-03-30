@@ -1,4 +1,4 @@
-import React, {Component, useRef} from 'react';
+import React, {useRef} from 'react';
 import {Chip} from "@material-ui/core";
 import Emoji from "a11y-react-emoji";
 

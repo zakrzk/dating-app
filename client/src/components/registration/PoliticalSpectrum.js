@@ -145,7 +145,7 @@ export class PoliticalSpectrum extends Component {
 
                 />
 
-                <p style={{fontSize: '11px', textAlign:'right'}}>Source of the definitions: <a target="_blank" href="https://8values.github.io/">https://8values.github.io</a>
+                <p style={{fontSize: '11px', textAlign:'right'}}>Source of the definitions: <a rel="noreferrer" target="_blank" href="https://8values.github.io/">https://8values.github.io</a>
                 </p>
 
             </div>

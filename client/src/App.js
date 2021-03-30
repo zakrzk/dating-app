@@ -1,7 +1,7 @@
 import './App.css';
 import 'fontsource-roboto';
 import {Header} from "./components/Header";
-import {BrowserRouter, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Card from "./components/Card";
 import Register from "./components/Register";
 import {Footer} from "./components/Footer";

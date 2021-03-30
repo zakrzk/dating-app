@@ -77,7 +77,6 @@ export const interests = {
             label: 'handball',
         },
     ],
-
     knowledge: [
         {
             symbol: '🧲️',

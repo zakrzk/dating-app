@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CreateIcon from '@material-ui/icons/Create';
@@ -11,8 +10,9 @@ import Avatar from '@material-ui/core/Avatar';
 import {genderOptions} from 'gender-options';
 
 import '../css/Register.css';
-import {FormControl, FormLabel, MenuItem, Radio, RadioGroup, Select} from "@material-ui/core";
+import {MenuItem, Select} from "@material-ui/core";
 import {Interests} from "./registration/Interests";
+import ShowMe from "./registration/ShowMe";
 import {PoliticalSpectrum} from "./registration/PoliticalSpectrum";
 
 export default function Register() {
@@ -20,11 +20,6 @@ export default function Register() {
     const [gender, setGender] = React.useState('default');
     const handleGenderChange = (event) => {
         setGender(event.target.value);
-    };
-
-    const [sexOrientation, setsSxOrientation] = React.useState('all');
-    const handleSexOrientation = (event) => {
-        setsSxOrientation(event.target.value);
     };
 
     return (
@@ -119,19 +114,7 @@ export default function Register() {
 
                         <Grid item xs={12}>
 
-                            <FormControl
-                                variant="outlined"
-                                component="fieldset"
-                            >
-                                <FormLabel component="legend" style={{padding: '5px 0'}}>Show me</FormLabel>
-
-                                <RadioGroup aria-label="sex-orientation-select" name="sex-orientation-select"
-                                            value={sexOrientation} onChange={handleSexOrientation}>
-                                    <FormControlLabel value="all" control={<Radio/>} label="All"/>
-                                    <FormControlLabel value="women" control={<Radio/>} label="Only women"/>
-                                    <FormControlLabel value="men" control={<Radio/>} label="Only men"/>
-                                </RadioGroup>
-                            </FormControl>
+                            <ShowMe/>
 
                         </Grid>
 
