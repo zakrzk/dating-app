@@ -14,11 +14,14 @@ import '../css/Register.css';
 import ShowMe from "./registration/ShowMe";
 import {PoliticalSpectrum} from "./registration/PoliticalSpectrum";
 
+
 export default function Register() {
 
+    const name = "";
     const [gender, setGender] = React.useState('default');
     const handleGenderChange = (event) => {
         setGender(event.target.value);
+
     };
 
     return (
@@ -42,7 +45,7 @@ export default function Register() {
                 >
                     let the algorithm do its magic ✨
                 </Typography>
-                <form className="register__form" noValidate>
+                <form className="register__form" noValidate onSubmit={null}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
