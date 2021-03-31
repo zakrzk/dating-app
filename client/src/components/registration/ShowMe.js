@@ -5,8 +5,8 @@ import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import '../../css/registration/ShowMe.css';
-import ShowMeOption from "./ShowMeOption";
-
+import OrientationOption from "./OrientationOption";
+import {genderOptions} from 'gender-options';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,13 +17,22 @@ const useStyles = makeStyles((theme) => ({
 function ShowMe() {
 
     return (
-        <div style={{display:'flex'}}>
-
-            <FormControl required error={null} component="fieldset">
+        <div >
+            <FormControl required error={null} component="fieldset" >
                 <FormLabel >Show me</FormLabel>
-                <FormGroup>
-                    <ShowMeOption
-                        name="xd" />
+                <FormGroup style={{
+                    flexDirection:'row',
+                    marginLeft: '10px'
+                }}
+                >
+
+                    {genderOptions.standard.map(gender => (
+                        <OrientationOption
+                            key={gender.value}
+                            value={gender.value}
+                            label={gender.label} />
+                    ))}
+
                 </FormGroup>
                 <FormHelperText>Choose at least one</FormHelperText>
             </FormControl>

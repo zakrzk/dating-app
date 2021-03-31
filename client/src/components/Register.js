@@ -8,10 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import {genderOptions} from 'gender-options';
-
-import '../css/Register.css';
 import {MenuItem, Select} from "@material-ui/core";
 import {Interests} from "./registration/Interests";
+import '../css/Register.css';
 import ShowMe from "./registration/ShowMe";
 import {PoliticalSpectrum} from "./registration/PoliticalSpectrum";
 
@@ -40,7 +39,6 @@ export default function Register() {
                         fontSize: '12pt',
                         paddingTop: '5px'
                     }}
-
                 >
                     let the algorithm do its magic ✨
                 </Typography>
@@ -110,7 +108,6 @@ export default function Register() {
                                 ))}
                             </Select>
                         </Grid>
-
 
                         <Grid item xs={12}>
 
