@@ -9,20 +9,29 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import {genderOptions} from 'gender-options';
 import {MenuItem, Select} from "@material-ui/core";
-import {Interests} from "./registration/Interests";
+import Interests from "./registration/Interests";
 import '../css/Register.css';
 import ShowMe from "./registration/ShowMe";
 import {PoliticalSpectrum} from "./registration/PoliticalSpectrum";
+import { useForm, Controller } from "react-hook-form";
 
 
 export default function Register() {
 
-    const name = "";
     const [gender, setGender] = React.useState('default');
     const handleGenderChange = (event) => {
         setGender(event.target.value);
 
     };
+
+    const interests = {};
+
+    const { register, handleSubmit, watch, errors, control, setValue } = useForm();
+    const onSubmit = data => {
+        const allData = {...data, interests}
+        console.log(allData);
+    }
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -45,18 +54,19 @@ export default function Register() {
                 >
                     let the algorithm do its magic ✨
                 </Typography>
-                <form className="register__form" noValidate onSubmit={null}>
+
+                <form className="register__form" noValidate onSubmit={handleSubmit(onSubmit)}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
-                                autoComplete="name"
-                                name="name"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 id="name"
                                 label="Name"
-                                autoFocus
+                                inputRef={register}
+                                name="name"
+                                defaultValue=""
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -66,8 +76,9 @@ export default function Register() {
                                 fullWidth
                                 id="email"
                                 label="Email"
+                                inputRef={register}
                                 name="email"
-                                autoComplete="email"
+                                defaultValue=""
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -80,6 +91,8 @@ export default function Register() {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                inputRef={register}
+                                defaultValue=""
                             />
                         </Grid>
 
@@ -93,29 +106,33 @@ export default function Register() {
                                 label="Age"
                                 name="age"
                                 autoComplete="age"
+                                inputRef={register}
+                                defaultValue=""
                             />
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Select
-                                variant="outlined"
-                                style={{width: '100%'}}
-                                labelId="gender-select"
-                                id="gender-select"
-                                value={gender}
-                                onChange={handleGenderChange}
-                            >
-                                <MenuItem disabled value="default">Select gender</MenuItem>
-                                {genderOptions.standard.map(gender => (
-                                    <MenuItem key={gender} value={gender.value}>{gender.label}</MenuItem>
-                                ))}
-                            </Select>
+                            <Controller
+                                as={
+                                    <Select
+                                        variant="outlined"
+                                        style={{width: '100%'}}
+                                        labelId="gender-select"
+                                        defaultValue="default"
+                                    >
+                                        <MenuItem disabled value="default">Select gender</MenuItem>
+                                        {genderOptions.standard.map((gender, index) => (
+                                            <MenuItem key={index} value={gender.value}>{gender.label}</MenuItem>
+                                        ))}
+                                    </Select>
+                                }
+                                name="gender"
+                                control={control}
+                            />
                         </Grid>
 
                         <Grid item xs={12}>
-
                             <ShowMe/>
-
                         </Grid>
 
                         <Grid item xs={12}>
@@ -126,12 +143,15 @@ export default function Register() {
                                 id="profession"
                                 label="Profession"
                                 name="profession"
-                                autoComplete="profession"
+                                inputProps={{ref: register}}
+                                defaultValue=""
                             />
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Interests/>
+                            <Interests
+                                onClick={(name, value) => {interests[name] = value}}
+                            />
                         </Grid>
 
                         <Grid item xs={12}>
