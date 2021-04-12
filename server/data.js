@@ -3,7 +3,7 @@ export const users = [
         id: 1,
         name: 'John',
         email: 'john@gmail.com',
-        password: 'hashedPass',
+        passwordHash: 'hashedPass',
         age: 21,
         gender: 'demiboy',
         orientation: [
@@ -24,18 +24,16 @@ export const users = [
             'mexican',
             'shrimps',
         ],
-        political: {
-            economics: 0,
-            diplomatic: -3,
-            civil: 3,
-            societal: 5
-        }
+        politicalEconomics: 0,
+        politicalDiplomatic: -3,
+        politicalCivil: 3,
+        politicalSocietal: 5
     },
     {
         id: 2,
         name: 'Monica',
         email: 'monica@gmail.com',
-        password: 'hashedPass2',
+        passwordHash: 'hashedPass2',
         age: 19,
         gender: 'female',
         orientation: [
@@ -57,11 +55,9 @@ export const users = [
             'sushi',
             'shrimps',
         ],
-        political: {
-            economics: -2,
-            diplomatic: 3,
-            civil: 4,
-            societal: 1
-        }
+        politicalEconomics: -2,
+        politicalDiplomatic: 3,
+        politicalCivil: 1,
+        politicalSocietal: -3
     },
 ]
