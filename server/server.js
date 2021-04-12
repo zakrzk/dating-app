@@ -1,15 +1,35 @@
-import {getTestMessage} from "./controllers/getTestMessage.controller.js";
-import sequelize from "sequelize";
+import * as express from 'express';
+import * as session from 'express-session';
+import * as bodyParser from 'body-parser';
 
-const express = require('express')
-const app = express()
-const PORT = process.env.SERVER_PORT
+import {sequelize} from "./util/database.js";
 
-app.get('/test', (req, res) => {
-    res.json({ message: 'This message comes from the server-container. (API Request)' })
-})
+import {User} from "./models/user.model.js";
+import {Hobby} from "./models/hobby.model.js";
 
-app.get('/database', [], getTestMessage)
+const app = express();
+import authRoutes from './routes/auth.routes'
+const PORT = process.env.SERVER_PORT || 3006;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({
+    secret: process.env.SESSION_SECRET || "secret",
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.get('/auth', authRoutes)
+app.use((error, req, res) => {
+    console.log(error);
+    res.status(400).send(error.toString())
+});
+
+Hobby.belongsTo(User, {
+    constraints: true,
+    onDelete: 'CASCADE' // also delete all user's hobbies
+});
+User.hasMany(Hobby);
 
 sequelize
     .sync()

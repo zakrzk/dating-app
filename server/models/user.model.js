@@ -1,5 +1,5 @@
-import * as Sequelize from 'sequelize'
-import {sequelize} from "../util/database";
+import Sequelize from 'sequelize';
+import {sequelize} from "../util/database.js";
 
 export const User = sequelize.define('user', {
     id: {

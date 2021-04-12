@@ -31,4 +31,4 @@ router.post('/register', [
     ],
     postRegisterUser);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,6 @@
 import * as mysql from "mysql2";
-import * as Sequelize from 'sequelize';
+
+import Sequelize from 'sequelize';
 
 export const sequelize = new Sequelize(
     process.env.DB_NAME,

@@ -1,15 +1,19 @@
-import * as Sequelize from 'sequelize'
+import Sequelize from 'sequelize';
 import {sequelize} from "../util/database.js";
 
-export const TestMessage = Sequelize.define('testMessage', {
+export const Hobby = sequelize.define('hobby', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },
-    message: {
+    userId: {
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+    },
+    value: {
         type: Sequelize.STRING,
-        allowNull: true
-    }
+        allowNull: false
+    },
 });
