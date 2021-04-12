@@ -1,16 +1,18 @@
-import {IsNotEmpty} from "class-validator";
+import {IsEmail, IsInt, isInt, IsNotEmpty, Length, Max, Min} from "class-validator";
 
 export class UserDto {
-    @IsNotEmpty()
+    @Length(2, 30)
     name: string;
 
-    @IsNotEmpty()
+    @IsEmail()
     email: string;
 
     @IsNotEmpty()
     passwordHash: string;
 
-    @IsNotEmpty()
+    @IsInt()
+    @Min(18)
+    @Max(120)
     age: number;
 
     @IsNotEmpty()
@@ -19,22 +21,22 @@ export class UserDto {
     @IsNotEmpty()
     orientation: string[];
 
-    @IsNotEmpty()
+    @Length(2,30)
     profession: string;
 
     @IsNotEmpty()
     hobbies: string[];
     
-    @IsNotEmpty()
+    @IsInt()
     politicalEconomics: number;
-    
-    @IsNotEmpty()
+
+    @IsInt()
     politicalDiplomatic: number;
-    
-    @IsNotEmpty()
+
+    @IsInt()
     politicalCivil: number;
-    
-    @IsNotEmpty()
+
+    @IsInt()
     politicalSocietal: number;
 
 }
