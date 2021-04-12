@@ -1,6 +1,5 @@
 export class User {
 
-  id: number;
   name: string;
   email: string;
   passwordHash: string;
@@ -15,7 +14,6 @@ export class User {
   politicalSocietal: number;
 
   constructor(userObj) {
-    this.id = userObj.id;
     this.name = userObj.name;
     this.email = userObj.email;
     this.passwordHash = userObj.passwordHash;

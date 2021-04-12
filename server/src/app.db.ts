@@ -109,4 +109,4 @@ export const getCommentsFromDB = async () => {
         return comments;
       });
 
-};s
+};

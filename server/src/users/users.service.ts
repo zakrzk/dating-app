@@ -12,7 +12,6 @@ export class UsersService {
     }
 
     async createUser(
-        id: number,
         name: string,
         email: string,
         passwordHash: string,
@@ -28,7 +27,6 @@ export class UsersService {
     ): Promise<User> {
 
         const newUser = new User({
-            id: id,
             name: name,
             email: email,
             passwordHash: passwordHash,

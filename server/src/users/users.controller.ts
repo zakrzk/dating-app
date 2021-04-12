@@ -1,7 +1,7 @@
 import {BadRequestException, Body, Controller, Get, Post} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {User} from './user.model';
-
+import {UserDto} from "./user.dto";
 
 @Controller('users')
 
@@ -12,7 +12,7 @@ export class UsersController {
 
     @Post()
     async createUser(
-        @Body('id') id: number,
+        @Body() data: UserDto,
         @Body('name') name: string,
         @Body('email') email: string,
         @Body('passwordHash') passwordHash: string,
@@ -24,11 +24,11 @@ export class UsersController {
         @Body('politicalEconomics') politicalEconomics: number,
         @Body('politicalDiplomatic') politicalDiplomatic: number,
         @Body('politicalCivil') politicalCivil: number,
-        @Body('politicalSocietal') politicalSocietal: number,
-    ): Promise<User> {
+        @Body('politicalSocietal') politicalSocietal: number,): Promise<User> {
+
+
         if (!email || !passwordHash) throw new BadRequestException();
         const newUser: User = await this.usersService.createUser(
-            id,
             name,
             email,
             passwordHash,
