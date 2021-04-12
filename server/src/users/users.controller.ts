@@ -26,8 +26,6 @@ export class UsersController {
         @Body('politicalCivil') politicalCivil: number,
         @Body('politicalSocietal') politicalSocietal: number,): Promise<User> {
 
-
-        if (!email || !passwordHash) throw new BadRequestException();
         const newUser: User = await this.usersService.createUser(
             name,
             email,
