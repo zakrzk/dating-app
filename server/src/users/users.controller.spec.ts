@@ -1,9 +1,7 @@
-import { createMock } from '@golevelup/nestjs-testing';
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UserDto } from './user.dto';
 import { UsersService } from './users.service';
-import { User } from './user.model';
 
 const testUser1 = {
     firstName: 'John',
@@ -92,7 +90,6 @@ const testUser3 = {
 };
 
 const testBreed1 = 'Test Breed 1';
-
 describe('User Controller', () => {
     let controller: UsersController;
     let service: UsersService;
@@ -187,50 +184,8 @@ describe('User Controller', () => {
     // });
     describe('newCat', () => {
         it('should create a new cat', () => {
-            const newUserDTO: UserDto = {
-                name: 'John',
-                email: 'john@gmail.com',
-                passwordHash: 'hashedPass',
-                age: 21,
-                gender: 'demiboy',
-                orientation: [
-                    'female',
-                    'male',
-                    'bigender'
-                ],
-                profession: 'doctor',
-                hobbies: [
-                    'soccer',
-                    'handball',
-                    'chess',
-                    'math',
-                    'music',
-                    'forestry',
-                    'design',
-                    'dyi',
-                    'mexican',
-                    'shrimps',
-                ],
-                politicalEconomics: 0,
-                politicalDiplomatic: -3,
-                politicalCivil: 3,
-                politicalSocietal: 5
-            }
-            expect(controller.createUser(
-                testUser1,
-                newUserDTO.name,
-                newUserDTO.email,
-                newUserDTO.passwordHash,
-                newUserDTO.age,
-                newUserDTO.gender,
-                newUserDTO.orientation,
-                newUserDTO.profession,
-                newUserDTO.hobbies,
-                newUserDTO.politicalEconomics,
-                newUserDTO.politicalDiplomatic,
-                newUserDTO.politicalCivil,
-                newUserDTO.politicalSocietal,
-            )).resolves.toEqual({
+            const newUserDTO: UserDto = testUser1;
+            expect(controller.createUser(newUserDTO)).resolves.toEqual({
                 _id: 'a uuid',
                 ...newUserDTO,
             });
