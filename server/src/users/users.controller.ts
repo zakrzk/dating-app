@@ -1,4 +1,4 @@
-import {BadRequestException, Body, Controller, Get, Post} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Get, Post, Put} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {User} from './user.model';
 import {UserDto} from "./user.dto";
@@ -46,5 +46,10 @@ export class UsersController {
     @Get()
     getAllUsersFromDb() {
         return this.usersService.getAllUsersFromDb();
+    }
+
+    @Put()
+    test() {
+        return 'test'
     }
 }
