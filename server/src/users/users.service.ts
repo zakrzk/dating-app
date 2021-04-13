@@ -11,34 +11,21 @@ export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<User>) {
     }
 
-    async createUser(
-        name: string,
-        email: string,
-        passwordHash: string,
-        age: number,
-        gender: string,
-        orientation: string[],
-        profession: string,
-        hobbies: string[],
-        politicalEconomics: number,
-        politicalDiplomatic: number,
-        politicalCivil: number,
-        politicalSocietal: number,
-    ): Promise<User> {
+    async createUser(UserDto): Promise<User> {
 
         const newUser = new User({
-            name: name,
-            email: email,
-            passwordHash: passwordHash,
-            age: age,
-            gender: gender,
-            orientation: orientation,
-            profession: profession,
-            hobbies: hobbies,
-            politicalEconomics: politicalEconomics,
-            politicalDiplomatic: politicalDiplomatic,
-            politicalCivil: politicalCivil,
-            politicalSocietal: politicalSocietal,
+            firstName: UserDto.firstName,
+            email: UserDto.email,
+            passwordHash: UserDto.passwordHash,
+            age: UserDto.age,
+            gender: UserDto.gender,
+            orientation: UserDto.orientation,
+            profession: UserDto.profession,
+            hobbies: UserDto.hobbies,
+            politicalEconomics: UserDto.politicalEconomics,
+            politicalDiplomatic: UserDto.politicalDiplomatic,
+            politicalCivil: UserDto.politicalCivil,
+            politicalSocietal: UserDto.politicalSocietal,
         });
 
         await createUser(newUser);

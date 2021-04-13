@@ -1,6 +1,6 @@
 export class User {
 
-  name: string;
+  firstName: string;
   email: string;
   passwordHash: string;
   age: number;
@@ -14,7 +14,7 @@ export class User {
   politicalSocietal: number;
 
   constructor(userObj) {
-    this.name = userObj.name;
+    this.firstName = userObj.firstName;
     this.email = userObj.email;
     this.passwordHash = userObj.passwordHash;
     this.age = userObj.age;

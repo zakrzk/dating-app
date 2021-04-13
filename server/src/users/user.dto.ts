@@ -2,41 +2,41 @@ import {IsEmail, IsInt, isInt, IsNotEmpty, Length, Max, Min} from "class-validat
 
 export class UserDto {
     @Length(2, 30)
-    name: string;
+    static firstName: string;
 
     @IsEmail()
-    email: string;
+    static email: string;
 
     @IsNotEmpty()
-    passwordHash: string;
+    static passwordHash: string;
 
     @IsInt()
     @Min(18)
     @Max(120)
-    age: number;
+    static age: number;
 
     @IsNotEmpty()
-    gender: string;
+    static gender: string;
 
     @IsNotEmpty()
-    orientation: string[];
+    static orientation: string[];
 
     @Length(2,30)
-    profession: string;
+    static profession: string;
 
     @IsNotEmpty()
-    hobbies: string[];
+    static hobbies: string[];
     
     @IsInt()
-    politicalEconomics: number;
+    static politicalEconomics: number;
 
     @IsInt()
-    politicalDiplomatic: number;
+    static politicalDiplomatic: number;
 
     @IsInt()
-    politicalCivil: number;
+    static politicalCivil: number;
 
     @IsInt()
-    politicalSocietal: number;
+    static politicalSocietal: number;
 
 }

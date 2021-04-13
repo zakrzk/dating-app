@@ -1,4 +1,4 @@
-import {BadRequestException, Body, Controller, Get, Post, Put} from '@nestjs/common';
+import {Body, Controller, Get, Post, Put} from '@nestjs/common';
 import {UsersService} from './users.service';
 import {User} from './user.model';
 import {UserDto} from "./user.dto";
@@ -11,36 +11,22 @@ export class UsersController {
     }
 
     @Post()
-    async createUser(
-        @Body() data: UserDto,
-        @Body('name') name: string,
-        @Body('email') email: string,
-        @Body('passwordHash') passwordHash: string,
-        @Body('age') age: number,
-        @Body('gender') gender: string,
-        @Body('orientation') orientation: string[],
-        @Body('profession') profession: string,
-        @Body('hobbies') hobbies: string[],
-        @Body('politicalEconomics') politicalEconomics: number,
-        @Body('politicalDiplomatic') politicalDiplomatic: number,
-        @Body('politicalCivil') politicalCivil: number,
-        @Body('politicalSocietal') politicalSocietal: number,): Promise<User> {
-
-        const newUser: User = await this.usersService.createUser(
-            name,
-            email,
-            passwordHash,
-            age,
-            gender,
-            orientation,
-            profession,
-            hobbies,
-            politicalEconomics,
-            politicalDiplomatic,
-            politicalCivil,
-            politicalSocietal
+    async createUser(@Body() data): Promise<User> {
+        return await this.usersService.createUser({
+                firstName: data.firstName,
+                email: data.email,
+                passwordHash: data.passwordHash,
+                age: data.age,
+                gender: data.gender,
+                orientation: data.orientation,
+                profession: data.profession,
+                hobbies: data.hobbies,
+                politicalEconomics: data.politicalEconomics,
+                politicalDiplomatic: data.politicalDiplomatic,
+                politicalCivil: data.politicalCivil,
+                politicalSocietal: data.politicalSocietal
+            }
         );
-        return newUser;
     }
 
     @Get()

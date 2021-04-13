@@ -17,12 +17,10 @@ export const connectionString = `mongodb+srv://${tempUser}:${tempPassword}@${tem
 
 mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
-
 export const createUser = async user => {
 
   const docUser = new User({
-    id: user.id,
-    name: user.name,
+    firstName: user.firstName,
     email: user.email,
     passwordHash: user.passwordHash,
     age: user.age,
@@ -34,7 +32,6 @@ export const createUser = async user => {
     politicalDiplomatic: user.politicalDiplomatic,
     politicalCivil: user.politicalCivil,
     politicalSocietal: user.politicalSocietal,
-    
   });
 
   const emailAlreadyInDb = await User.exists({ email: user.email });
