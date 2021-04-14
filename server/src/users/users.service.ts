@@ -35,7 +35,7 @@ export class UsersService {
     }
 
     async getUsers(): Promise<User[]> {
-        return await getAllUsersFromDb();
+        return getAllUsersFromDb();
     }
 
 }
