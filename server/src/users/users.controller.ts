@@ -29,12 +29,8 @@ export class UsersController {
     }
 
     @Get()
-    getAllUsersFromDb() {
-        return this.usersService.getAllUsersFromDb();
+    getUsers() {
+        return this.usersService.getUsers();
     }
 
-    @Put()
-    test() {
-        return 'test'
-    }
 }
