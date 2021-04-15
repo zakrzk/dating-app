@@ -1,9 +1,14 @@
-import React from 'react';
-import {Checkbox, FormControlLabel} from "@material-ui/core";
+import React, {useRef} from 'react';
+import {Checkbox, Chip, FormControlLabel} from "@material-ui/core";
 
 
 function OrientationOption(props) {
+    const checkboxRef = useRef(null)
+    const handleClick = (event) => {
+        const attribute = Boolean (event.target.checked);
+        props.onClick(props.label,  attribute)
 
+    };
     return (
         <>
             <FormControlLabel
@@ -11,8 +16,10 @@ function OrientationOption(props) {
                 value="end"
                 control={
                     <Checkbox
+                        ref={checkboxRef}
                         inputProps={{'aria-label': props.value}}
                         color="primary"
+                        onClick={handleClick}
 
                     />}
                 label={props.label}

@@ -7,6 +7,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import '../../css/registration/ShowMe.css';
 import OrientationOption from "./OrientationOption";
 import {genderOptions} from 'gender-options';
+import Hobby from "./Hobby";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function ShowMe() {
+function ShowMe(props) {
 
     return (
         <div >
@@ -30,7 +31,9 @@ function ShowMe() {
                         <OrientationOption
                             key={gender.value}
                             value={gender.value}
-                            label={gender.label} />
+                            label={gender.label}
+                            onClick={props.onClick}
+                        />
                     ))}
 
                 </FormGroup>

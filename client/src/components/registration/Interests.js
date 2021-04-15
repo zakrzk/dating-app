@@ -6,7 +6,6 @@ import Hobby from "./Hobby";
 import {interests} from './HobbiesData'
 
 export default function Interests(props) {
-    console.log(props);
     return (
         <div>
             <FormLabel component="legend" style={{padding: '8px 0'}}>

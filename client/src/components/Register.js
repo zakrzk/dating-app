@@ -25,10 +25,11 @@ export default function Register() {
     };
 
     const interests = {};
+    const orientation = {};
 
     const { register, handleSubmit, watch, errors, control, setValue } = useForm();
     const onSubmit = data => {
-        const allData = {...data, interests}
+        const allData = {...data, interests, orientation}
         console.log(allData);
     }
 
@@ -132,7 +133,9 @@ export default function Register() {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <ShowMe/>
+                            <ShowMe
+                                onClick={(name, value) => {orientation[name] = value}}
+                            />
                         </Grid>
 
                         <Grid item xs={12}>
