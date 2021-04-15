@@ -12,7 +12,7 @@ import {MenuItem, Select} from "@material-ui/core";
 import Interests from "./registration/Interests";
 import '../css/Register.css';
 import ShowMe from "./registration/ShowMe";
-import {PoliticalSpectrum} from "./registration/PoliticalSpectrum";
+import PoliticalSpectrum from "./registration/PoliticalSpectrum";
 import { useForm, Controller } from "react-hook-form";
 
 
@@ -25,11 +25,12 @@ export default function Register() {
     };
 
     const interests = {};
+    const politics = {};
     const orientation = {};
 
     const { register, handleSubmit, watch, errors, control, setValue } = useForm();
     const onSubmit = data => {
-        const allData = {...data, interests, orientation}
+        const allData = {...data, interests, orientation, politics}
         console.log(allData);
     }
 
@@ -158,7 +159,9 @@ export default function Register() {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <PoliticalSpectrum/>
+                            <PoliticalSpectrum
+                                onClick={(name, value) => {politics[name] = value}}
+                            />
                         </Grid>
 
                     </Grid>

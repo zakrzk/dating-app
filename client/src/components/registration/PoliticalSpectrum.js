@@ -1,8 +1,9 @@
 import "../../css/registration/PoliticalSpectrum.css"
 
-import React, {Component} from 'react';
-import {FormLabel, Slider} from "@material-ui/core";
+import React, {Component, useRef} from 'react';
+import {Chip, FormLabel, Slider} from "@material-ui/core";
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
+import Hobby from "./Hobby";
 
 const marks = {
     economics: [
@@ -55,13 +56,24 @@ function valuetext(value) {
 }
 
 
-export class PoliticalSpectrum extends Component {
+export default function PoliticalSpectrum(props) {
 
-    render() {
+    const handleClick = (event) => {
+
+        const value = Number (event.target.getAttribute('aria-valuenow'))
+        let label = event.target.getAttribute('label');
+        if (label) {
+            label = event.target.getAttribute('label')
+            props.onClick(label, value)
+        }
+        else {
+            label = event.target.parentNode.attributes[1].nodeValue
+            props.onClick(label, value)
+        }
+    };
+
         return (
             <div>
-
-
                 <FormLabel component="legend" style={{padding: '8px 0'}}>
                     Your political spectrum
                 </FormLabel>
@@ -80,8 +92,12 @@ export class PoliticalSpectrum extends Component {
                     step={1}
                     min={-5}
                     max={5}
-                    marks={marks.economics}
+
+                    marks={marks.diplomatic}
                     style={{marginBottom: '60px'}}
+
+                    onClick={handleClick}
+                    label='economics'
                 />
 
                 <h4>Diplomatic Axis</h4>
@@ -102,8 +118,12 @@ export class PoliticalSpectrum extends Component {
                     step={1}
                     min={-5}
                     max={5}
+
                     marks={marks.diplomatic}
                     style={{marginBottom: '60px'}}
+
+                    onClick={handleClick}
+                    label='diplomatic'
 
                 />
 
@@ -121,8 +141,10 @@ export class PoliticalSpectrum extends Component {
                     getAriaValueText={valuetext}
                     aria-labelledby="discrete-slider-custom"
                     step={1}
+                    onClick={handleClick}
                     min={-5}
                     max={5}
+                    label='civil'
                     marks={marks.civil}
                     style={{marginBottom: '60px'}}
 
@@ -138,7 +160,9 @@ export class PoliticalSpectrum extends Component {
                     getAriaValueText={valuetext}
                     aria-labelledby="discrete-slider-custom"
                     step={1}
+                    label='societal'
                     min={-5}
+                    onClick={handleClick}
                     max={5}
                     marks={marks.societal}
                     style={{marginBottom: '60px'}}
@@ -151,5 +175,4 @@ export class PoliticalSpectrum extends Component {
             </div>
 
         );
-    }
 }
