@@ -16,7 +16,8 @@ function Hobby(props) {
             inputEl.current.style.backgroundColor = '#87d37c'
             inputEl.current.style.color = '#fafafa'
         }
-        props.onClick(props.label,  !attribute)
+        // convert to kebab-case ("Spicy food" -> "spicy-food" etc.)
+        props.onClick(props.label.toLowerCase().replaceAll(' ', '-'),  !attribute)
 
     };
     return (

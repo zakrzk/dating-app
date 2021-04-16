@@ -13,7 +13,7 @@ import Interests from "./registration/Interests";
 import '../css/Register.css';
 import ShowMe from "./registration/ShowMe";
 import PoliticalSpectrum from "./registration/PoliticalSpectrum";
-import { useForm, Controller } from "react-hook-form";
+import {useForm, Controller} from "react-hook-form";
 
 
 export default function Register() {
@@ -28,10 +28,51 @@ export default function Register() {
     const politics = {};
     const orientation = {};
 
-    const { register, handleSubmit, watch, errors, control, setValue } = useForm();
+    const {register, handleSubmit, watch, errors, control, setValue} = useForm();
     const onSubmit = data => {
         const allData = {...data, interests, orientation, politics}
         console.log(allData);
+
+        let orientationArr = [];
+
+        console.log(JSON.stringify({
+            name: allData.name,
+            email: allData.email,
+            passwordHash: allData.password,
+            age: allData.age,
+            gender: allData.gender,
+            orientation: Object.keys(allData.orientation),
+            profession: allData.profession,
+            hobbies: Object.keys(allData.interests),
+            politicalEconomics: allData.politics.economics,
+            politicalDiplomatic: allData.politics.diplomatic,
+            politicalCivil: allData.politics.civil,
+            politicalSocietal: allData.politics.societal
+        }))
+
+        fetch('http://localhost:3006/users', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName: allData.name,
+                email: allData.email,
+                passwordHash: allData.password,
+                age: allData.age,
+                gender: allData.gender,
+                orientation: Object.keys(allData.orientation),
+                profession: allData.profession,
+                hobbies: Object.keys(allData.interests),
+                politicalEconomics: allData.politics.economics,
+                politicalDiplomatic: allData.politics.diplomatic,
+                politicalCivil: allData.politics.civil,
+                politicalSocietal: allData.politics.societal
+            })
+        })
+            .catch(console.log)
+
     }
 
 
@@ -135,7 +176,9 @@ export default function Register() {
 
                         <Grid item xs={12}>
                             <ShowMe
-                                onClick={(name, value) => {orientation[name] = value}}
+                                onClick={(name, value) => {
+                                    orientation[name] = value
+                                }}
                             />
                         </Grid>
 
@@ -154,13 +197,17 @@ export default function Register() {
 
                         <Grid item xs={12}>
                             <Interests
-                                onClick={(name, value) => {interests[name] = value}}
+                                onClick={(name, value) => {
+                                    interests[name] = value
+                                }}
                             />
                         </Grid>
 
                         <Grid item xs={12}>
                             <PoliticalSpectrum
-                                onClick={(name, value) => {politics[name] = value}}
+                                onClick={(name, value) => {
+                                    politics[name] = value
+                                }}
                             />
                         </Grid>
 

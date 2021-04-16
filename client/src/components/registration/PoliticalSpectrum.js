@@ -92,10 +92,8 @@ export default function PoliticalSpectrum(props) {
                     step={1}
                     min={-5}
                     max={5}
-
                     marks={marks.diplomatic}
                     style={{marginBottom: '60px'}}
-
                     onClick={handleClick}
                     label='economics'
                 />

@@ -43,6 +43,7 @@ export const createUser = async user => {
 };
 
 export const getAllUsersFromDb = () => {
+
   return User.find(function(err, users) {
     if (err) throw new BadRequestException('Server error.');
     console.log('GET /users');

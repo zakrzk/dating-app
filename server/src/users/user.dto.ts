@@ -8,6 +8,7 @@ export class UserDto {
     static email: string;
 
     @IsNotEmpty()
+    @Length(8, 64)
     static passwordHash: string;
 
     @IsInt()
