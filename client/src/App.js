@@ -5,6 +5,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Card from "./components/Card";
 import Register from "./components/Register";
 import {Footer} from "./components/Footer";
+import Login from "./components/Login";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/success">
                         <h2>Registration successful!</h2>
                         <h4>Please log in now:</h4>
+                        <Login/>
                     </Route>
                     <Route path="/register">
                         <Register/>

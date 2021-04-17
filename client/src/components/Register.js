@@ -36,7 +36,7 @@ export default function Register() {
         const allData = {...data, interests, orientation, politics}
 
         fetch('http://localhost:3006/users', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

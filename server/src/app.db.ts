@@ -2,7 +2,8 @@
 import * as mongoose from 'mongoose';
 import {BadRequestException} from '@nestjs/common';
 import {UserSchema} from './users/user.schema';
-
+import * as bcrypt from 'bcryptjs'
+import * as jwt from 'jsonwebtoken';
 const User = mongoose.model('User', UserSchema);
 let currentComments = [];
 
@@ -17,10 +18,11 @@ mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: t
 
 export const createUser = async user => {
 
+    let hashedPass = await bcrypt.hash(user.passwordHash, 12);
     const docUser = new User({
         firstName: user.firstName,
         email: user.email,
-        passwordHash: user.passwordHash,
+        passwordHash: hashedPass,
         age: user.age,
         gender: user.gender,
         orientation: user.orientation,
@@ -120,5 +122,45 @@ export const getMatchesFromDb = async (id1, id2) => {
     const finalMatchLevel = Math.ceil((hobbyMatchLevel * 0.7) + (politicsMatchLevel * 0.3))
     return ("Final Match: " + finalMatchLevel + "%")
 
+};
+
+
+export const loginUserViaDb = async (email, passwordFromLoginForm) => {
+
+    console.log("POST /users");
+
+    let tempUser;
+
+    const user = await User.findOne({email: email},
+        function (err, user) {
+            if (err) return new Error('User not found or invalid data given.');
+            return JSON.stringify(user);
+        });
+
+    tempUser = user;
+
+    console.log(user.passwordHash)
+    console.log(passwordFromLoginForm)
+
+
+    if (!user.passwordHash || !passwordFromLoginForm) {
+        return "Invalid data given"
+    }
+
+    return await bcrypt.compare(passwordFromLoginForm, user.passwordHash)
+        .then(passMatch => {
+            if (!passMatch) {
+                return {err: 'Email / password did not match.'}
+            }
+            const token = jwt.sign({
+                    userId: tempUser._id,
+                    email: tempUser.email
+                },
+                "my_jwt_secret",
+                {expiresIn: "72h"},
+            );
+            return {userId: tempUser._id, token: token};
+        })
+        .catch(err => console.log(err))
 };
 

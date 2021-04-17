@@ -1,43 +1,52 @@
-import {IsEmail, IsInt, isInt, IsNotEmpty, Length, Max, Min} from "class-validator";
+import {IsEmail, IsInt, IsNotEmpty, Length, Max, Min} from "class-validator";
 
 export class UserDto {
+    @IsNotEmpty()
     @Length(2, 30)
-    static firstName: string;
+    firstName: string;
 
     @IsEmail()
-    static email: string;
+    email: string;
 
     @IsNotEmpty()
     @Length(8, 64)
-    static passwordHash: string;
+    passwordHash: string;
 
     @IsInt()
     @Min(18)
     @Max(120)
-    static age: number;
+    age: number;
 
     @IsNotEmpty()
-    static gender: string;
+    gender: string;
 
     @IsNotEmpty()
-    static orientation: string[];
+    orientation: string[];
 
-    @Length(2,30)
-    static profession: string;
+    @Length(2, 30)
+    profession: string;
 
     @IsNotEmpty()
-    static hobbies: string[];
-    
-    @IsInt()
-    static politicalEconomics: number;
+    hobbies: string[];
 
     @IsInt()
-    static politicalDiplomatic: number;
+    @Min(-5)
+    @Max(5)
+    politicalEconomics: number;
 
     @IsInt()
-    static politicalCivil: number;
+    @Min(-5)
+    @Max(5)
+    politicalDiplomatic: number;
 
     @IsInt()
-    static politicalSocietal: number;
+    @Min(-5)
+    @Max(5)
+    politicalCivil: number;
+
+    @IsInt()
+    @Min(-5)
+    @Max(5)
+    politicalSocietal: number;
 
 }

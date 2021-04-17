@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './user.model';
-import { createUser, getAllUsersFromDb } from '../app.db';
+import { createUser, getAllUsersFromDb, loginUserViaDb } from '../app.db';
 
 @Injectable()
 export class UsersService {
@@ -35,6 +35,10 @@ export class UsersService {
 
     async getUsers(): Promise<User[]> {
         return getAllUsersFromDb();
+    }
+
+    async loginUser(obj): Promise<any> {
+        return loginUserViaDb(obj.email, obj.password);
     }
 
 }
