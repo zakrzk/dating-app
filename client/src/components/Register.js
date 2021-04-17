@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -14,9 +14,12 @@ import '../css/Register.css';
 import ShowMe from "./registration/ShowMe";
 import PoliticalSpectrum from "./registration/PoliticalSpectrum";
 import {useForm, Controller} from "react-hook-form";
+import { Redirect } from "react-router";
 
 
 export default function Register() {
+
+    const [submitted, setSubmitted] = useState(false);
 
     const [gender, setGender] = React.useState('default');
     const handleGenderChange = (event) => {
@@ -31,24 +34,6 @@ export default function Register() {
     const {register, handleSubmit, watch, errors, control, setValue} = useForm();
     const onSubmit = data => {
         const allData = {...data, interests, orientation, politics}
-        console.log(allData);
-
-        let orientationArr = [];
-
-        console.log(JSON.stringify({
-            name: allData.name,
-            email: allData.email,
-            passwordHash: allData.password,
-            age: allData.age,
-            gender: allData.gender,
-            orientation: Object.keys(allData.orientation),
-            profession: allData.profession,
-            hobbies: Object.keys(allData.interests),
-            politicalEconomics: allData.politics.economics,
-            politicalDiplomatic: allData.politics.diplomatic,
-            politicalCivil: allData.politics.civil,
-            politicalSocietal: allData.politics.societal
-        }))
 
         fetch('http://localhost:3006/users', {
             method: 'POST',
@@ -73,6 +58,8 @@ export default function Register() {
         })
             .catch(console.log)
 
+        setSubmitted(true)
+        console.log(submitted);
     }
 
 
@@ -230,6 +217,8 @@ export default function Register() {
                     </Grid>
                 </form>
             </div>
+            {submitted === true ? <Redirect to="/success" /> : null  }
         </Container>
+
     );
 }

@@ -55,12 +55,10 @@ function valuetext(value) {
     return `${value}°C`;
 }
 
-
 export default function PoliticalSpectrum(props) {
 
-    const handleClick = (event) => {
-
-        const value = Number (event.target.getAttribute('aria-valuenow'))
+    const handleClick = (event, newValue) => {
+        const value = newValue;
         let label = event.target.getAttribute('label');
         if (label) {
             label = event.target.getAttribute('label')
@@ -70,6 +68,8 @@ export default function PoliticalSpectrum(props) {
             label = event.target.parentNode.attributes[1].nodeValue
             props.onClick(label, value)
         }
+        console.log(label, value)
+
     };
 
         return (
@@ -94,7 +94,7 @@ export default function PoliticalSpectrum(props) {
                     max={5}
                     marks={marks.diplomatic}
                     style={{marginBottom: '60px'}}
-                    onClick={handleClick}
+                    onChange={handleClick}
                     label='economics'
                 />
 
@@ -120,7 +120,7 @@ export default function PoliticalSpectrum(props) {
                     marks={marks.diplomatic}
                     style={{marginBottom: '60px'}}
 
-                    onClick={handleClick}
+                    onChange={handleClick}
                     label='diplomatic'
 
                 />
@@ -139,7 +139,7 @@ export default function PoliticalSpectrum(props) {
                     getAriaValueText={valuetext}
                     aria-labelledby="discrete-slider-custom"
                     step={1}
-                    onClick={handleClick}
+                    onChange={handleClick}
                     min={-5}
                     max={5}
                     label='civil'
@@ -160,7 +160,7 @@ export default function PoliticalSpectrum(props) {
                     step={1}
                     label='societal'
                     min={-5}
-                    onClick={handleClick}
+                    onChange={handleClick}
                     max={5}
                     marks={marks.societal}
                     style={{marginBottom: '60px'}}

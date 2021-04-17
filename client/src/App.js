@@ -18,6 +18,10 @@ function App() {
                     <Route path="/chat">
                         <h2>Chat</h2>
                     </Route>
+                    <Route path="/success">
+                        <h2>Registration successful!</h2>
+                        <h4>Please log in now:</h4>
+                    </Route>
                     <Route path="/register">
                         <Register/>
                     </Route>
