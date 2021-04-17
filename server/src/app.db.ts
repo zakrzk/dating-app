@@ -51,31 +51,23 @@ export const getAllUsersFromDb = () => {
 
 export const getMatchesFromDb = async (id1, id2) => {
 
+    console.log("GET /matches");
+
     const User1 = await User.findOne({_id: id1},
         function (err, user1) {
             if (err) return new Error('User not found or invalid data given.');
-            console.log('GET /matches');
             return JSON.stringify(user1);
         });
 
     const User2 = await User.findOne({_id: id2},
         function (err, user2) {
             if (err) return new Error('User not found or invalid data given.');
-            console.log('GET /matches');
             return JSON.stringify(user2);
         });
 
     // Step 1: Check if they are interested in each other (sexual orientation)
     const User1Gender = User1.gender;
-    const User2Gender = User2.gender;
-
-    const User1Orientation = User1.orientation.map(_ => _.toLowerCase());
     const User2Orientation = User2.orientation.map(_ => _.toLowerCase());
-
-    console.log("User 1 gender: " + User1Gender);
-    console.log("User 2 gender: " + User2Gender);
-    console.log("User 1 orientation: " + User1Orientation);
-    console.log("User 2 orientation: " + User2Orientation);
 
     if (!User2Orientation.includes(User1Gender)) {
         return "Users are not interested in each others (sexual orientation) "
@@ -84,12 +76,6 @@ export const getMatchesFromDb = async (id1, id2) => {
     // Step 2: Calculate number of total and shared hobbies
     const User1Hobbies = User1.hobbies;
     const User2Hobbies = User2.hobbies;
-
-    console.log("User1Hobbies: " + User1Hobbies)
-    console.log("User2Hobbies: " + User2Hobbies)
-    console.log("User1Hobbies length: " + User1Hobbies.length)
-    console.log("User2Hobbies length: " + User2Hobbies.length)
-
     const hobbiesMerged = User1Hobbies.concat(User2Hobbies);
     // delete duplicates
     const hobbiesMergedFiltered = hobbiesMerged.filter(function (item, pos) {
@@ -98,12 +84,7 @@ export const getMatchesFromDb = async (id1, id2) => {
     const unionPower = hobbiesMergedFiltered.length;
     const intersectionPower = User1Hobbies.length + User2Hobbies.length - unionPower
 
-    console.log("unionPower: " + unionPower);
-    console.log("intersectionPower: " + intersectionPower);
-
     const hobbyMatchLevel = Math.floor(intersectionPower / unionPower * 100)
-    console.log("Hobby matching: " + hobbyMatchLevel + "%");
-
 
     // Step 3: Calculate politics compass matching
 
@@ -120,7 +101,6 @@ export const getMatchesFromDb = async (id1, id2) => {
     const User1Societal = User1.politicalSocietal;
     const User2Societal = User2.politicalSocietal;
 
-
     let economicsDifference = Math.abs(User1Economics, User2Economics)
     let economicsMatch = (10 - economicsDifference) / 10 // 0.5
 
@@ -133,11 +113,12 @@ export const getMatchesFromDb = async (id1, id2) => {
     let societalDifference = Math.abs(User1Societal, User2Societal) // 9
     let societalMatch = (10 - societalDifference) / 10 // 0.1
 
-    let politicsMatch = (economicsMatch + diplomaticMatch + civilMatch + societalMatch) / 4 * 100
+    let politicsMatchLevel = (economicsMatch + diplomaticMatch + civilMatch + societalMatch) / 4 * 100
 
-    console.log(politicsMatch)
+    console.log("Politics Match: " + politicsMatchLevel + "%")
 
-    const finalMatchLevel = (hobbyMatchLevel * 0.6) + (politicsMatch * 0.4)
-    console.log("finalMatchLevel:" + finalMatchLevel)
+    const finalMatchLevel = Math.ceil((hobbyMatchLevel * 0.7) + (politicsMatchLevel * 0.3))
+    return ("Final Match: " + finalMatchLevel + "%")
+
 };
 
