@@ -1,11 +1,9 @@
 // @ts-nocheck
 import * as mongoose from 'mongoose';
-import { BadRequestException } from '@nestjs/common';
-import { UserSchema } from './users/user.schema';
-import { CommentSchema } from './comments/comment.schema';
+import {BadRequestException} from '@nestjs/common';
+import {UserSchema} from './users/user.schema';
 
 const User = mongoose.model('User', UserSchema);
-const Comment = mongoose.model('Comment', CommentSchema);
 let currentComments = [];
 
 const tempUser = "dbUser";
@@ -15,96 +13,131 @@ const tempDb = "datingapp"
 // export const connectionString = `mongodb://${process.env.DB_USER_NAME}:${process.env.DB_USER_PASSWORD}@${process.env.DB_HOST}:27017/${process.env.MONGO_INITDB_DATABASE}`;
 export const connectionString = `mongodb+srv://${tempUser}:${tempPassword}@${tempHost}/${tempDb}`;
 
-mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
 
 export const createUser = async user => {
 
-  const docUser = new User({
-    firstName: user.firstName,
-    email: user.email,
-    passwordHash: user.passwordHash,
-    age: user.age,
-    gender: user.gender,
-    orientation: user.orientation,
-    profession: user.profession,
-    hobbies: user.hobbies,
-    politicalEconomics: user.politicalEconomics,
-    politicalDiplomatic: user.politicalDiplomatic,
-    politicalCivil: user.politicalCivil,
-    politicalSocietal: user.politicalSocietal,
-  });
+    const docUser = new User({
+        firstName: user.firstName,
+        email: user.email,
+        passwordHash: user.passwordHash,
+        age: user.age,
+        gender: user.gender,
+        orientation: user.orientation,
+        profession: user.profession,
+        hobbies: user.hobbies,
+        politicalEconomics: user.politicalEconomics,
+        politicalDiplomatic: user.politicalDiplomatic,
+        politicalCivil: user.politicalCivil,
+        politicalSocietal: user.politicalSocietal,
+    });
 
-  const emailAlreadyInDb = await User.exists({ email: user.email });
-  if (emailAlreadyInDb) {
-    throw new BadRequestException('Email already registered in the database.');
-  } else {
-    docUser.save().then(() => console.log(`${user.email} has registered`));
-  }
+    const emailAlreadyInDb = await User.exists({email: user.email});
+    if (emailAlreadyInDb) {
+        throw new BadRequestException('Email already registered in the database.');
+    } else {
+        docUser.save().then(() => console.log(`${user.email} has registered`));
+    }
 };
 
 export const getAllUsersFromDb = () => {
 
-  return User.find(function(err, users) {
-    if (err) throw new BadRequestException('Server error.');
-    console.log('GET /users');
-    return users;
-  });
-};
-
-
-// ******* COMMENTS SECTION /////
-export const addCommentToDB = async comment => {
-
-  let doc = new Comment({
-    movieId: comment.movieId,
-    movieComment: comment.movieComment,
-  });
-
-  const movieAlreadyInDB = await Movie.exists({ id: comment.movieId });
-
-  if (!movieAlreadyInDB) {
-    throw new BadRequestException('Movie not in the database yet. Please add it first.');
-  } else {
-    currentComments = await getCurrentComments();
-    let newComments;
-    currentComments.push(comment.movieComment);
-    newComments = [...currentComments];
-    Movie.findOneAndUpdate(
-      { id: comment.movieId },
-      { comments: newComments },
-      { useFindAndModify: false },
-      function(err, ok) {
-        doc.save().then(doc => {
-          console.log('POST /comments');
-        });
-      });
-  }
-
-  async function getCurrentComments() {
-    let currentComments = await Movie.find({ id: comment.movieId }, function(err, obj) {
-      return obj['comments'];
+    return User.find(function (err, users) {
+        if (err) throw new BadRequestException('Server error.');
+        console.log('GET /users');
+        return users;
     });
-    if (currentComments[0]) {
-      // @ts-ignore
-      return currentComments[0].toObject().comments;
+};
+
+export const getMatchesFromDb = async (id1, id2) => {
+
+    const User1 = await User.findOne({_id: id1},
+        function (err, user1) {
+            if (err) return new Error('User not found or invalid data given.');
+            console.log('GET /matches');
+            return JSON.stringify(user1);
+        });
+
+    const User2 = await User.findOne({_id: id2},
+        function (err, user2) {
+            if (err) return new Error('User not found or invalid data given.');
+            console.log('GET /matches');
+            return JSON.stringify(user2);
+        });
+
+    // Step 1: Check if they are interested in each other (sexual orientation)
+    const User1Gender = User1.gender;
+    const User2Gender = User2.gender;
+
+    const User1Orientation = User1.orientation.map(_ => _.toLowerCase());
+    const User2Orientation = User2.orientation.map(_ => _.toLowerCase());
+
+    console.log("User 1 gender: " + User1Gender);
+    console.log("User 2 gender: " + User2Gender);
+    console.log("User 1 orientation: " + User1Orientation);
+    console.log("User 2 orientation: " + User2Orientation);
+
+    if (!User2Orientation.includes(User1Gender)) {
+        return "Users are not interested in each others (sexual orientation) "
     }
-    return [];
-  }
+
+    // Step 2: Calculate number of total and shared hobbies
+    const User1Hobbies = User1.hobbies;
+    const User2Hobbies = User2.hobbies;
+
+    console.log("User1Hobbies: " + User1Hobbies)
+    console.log("User2Hobbies: " + User2Hobbies)
+    console.log("User1Hobbies length: " + User1Hobbies.length)
+    console.log("User2Hobbies length: " + User2Hobbies.length)
+
+    const hobbiesMerged = User1Hobbies.concat(User2Hobbies);
+    // delete duplicates
+    const hobbiesMergedFiltered = hobbiesMerged.filter(function (item, pos) {
+        return hobbiesMerged.indexOf(item) == pos;
+    })
+    const unionPower = hobbiesMergedFiltered.length;
+    const intersectionPower = User1Hobbies.length + User2Hobbies.length - unionPower
+
+    console.log("unionPower: " + unionPower);
+    console.log("intersectionPower: " + intersectionPower);
+
+    const hobbyMatchLevel = Math.floor(intersectionPower / unionPower * 100)
+    console.log("Hobby matching: " + hobbyMatchLevel + "%");
+
+
+    // Step 3: Calculate politics compass matching
+
+    const User1Economics = User1.politicalEconomics;
+    const User2Economics = User2.politicalEconomics;
+
+
+    const User1Diplomatic = User1.politicalDiplomatic;
+    const User2Diplomatic = User2.politicalDiplomatic;
+
+    const User1Civil = User1.politicalCivil;
+    const User2Civil = User2.politicalCivil;
+
+    const User1Societal = User1.politicalSocietal;
+    const User2Societal = User2.politicalSocietal;
+
+
+    let economicsDifference = Math.abs(User1Economics, User2Economics)
+    let economicsMatch = (10 - economicsDifference) / 10 // 0.5
+
+    let diplomaticDifference = Math.abs(User1Diplomatic, User2Diplomatic) //5
+    let diplomaticMatch = (10 - diplomaticDifference) / 10 // 0.5
+
+    let civilDifference = Math.abs(User1Civil, User2Civil) // 2
+    let civilMatch = (10 - civilDifference) / 10 // 0.8
+
+    let societalDifference = Math.abs(User1Societal, User2Societal) // 9
+    let societalMatch = (10 - societalDifference) / 10 // 0.1
+
+    let politicsMatch = (economicsMatch + diplomaticMatch + civilMatch + societalMatch) / 4 * 100
+
+    console.log(politicsMatch)
+
+    const finalMatchLevel = (hobbyMatchLevel * 0.6) + (politicsMatch * 0.4)
+    console.log("finalMatchLevel:" + finalMatchLevel)
 };
 
-
-/*
-   Returns only movies with comments
-   Returned object has only 'title' and 'comments' properties
- */
-
-export const getCommentsFromDB = async () => {
-  return Movie.find({'comments.0': {'$exists': true}},
-      '-_id -director -runtime -country -__v -year -id',
-      function (err, comments) {
-        if (err) return console.error(err);
-        console.log('GET /comments');
-        return comments;
-      });
-
-};

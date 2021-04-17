@@ -4,7 +4,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './user.model';
 import { createUser, getAllUsersFromDb } from '../app.db';
-import {Movie} from "../../dist/movies/movie.model";
 
 @Injectable()
 export class UsersService {
