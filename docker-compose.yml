@@ -3,13 +3,17 @@ services:
   client:
     container_name: client
     restart: always
-    build: ./client
+    build:
+      context: ./client
+      args:
+        REACT_APP_SERVER_HOST: "server"
     ports:
-      - ${CLIENT_PORT}:3001
+      - 80:80
     networks:
       - app-network
     environment:
-      - PORT=${CLIENT_PORT}
+      - PORT=${PORT}
+      - REACT_APP_SERVER_HOST=${REACT_APP_SERVER_HOST}
     links:
       - server
 
@@ -21,25 +25,23 @@ services:
       - ${SERVER_PORT}:3006
     networks:
       - app-network
-    environment:
-      - SERVER_PORT=${SERVER_PORT}
-    links:
-      - database
+#    links:
+#      - database
 
-  database:
-    container_name: sql
-    image: mysql:8.0.21
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    ports:
-      - ${DATABSE_PORT}:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
-      - MYSQL_DATABASE=${DB_NAME}
-    networks:
-      - app-network
+#  database:
+#    container_name: sql
+#    image: mysql:8.0.21
+#    command: --default-authentication-plugin=mysql_native_password
+#    restart: always
+#    ports:
+#      - ${DATABSE_PORT}:3306
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_USER=${DB_USER}
+#      - MYSQL_PASSWORD=${DB_PASSWORD}
+#      - MYSQL_DATABASE=${DB_NAME}
+#    networks:
+#      - app-network
 
 networks:
   app-network:

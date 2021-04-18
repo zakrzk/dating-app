@@ -16,8 +16,10 @@ import PoliticalSpectrum from "./registration/PoliticalSpectrum";
 import {useForm, Controller} from "react-hook-form";
 import {Redirect} from "react-router";
 
+export let serverHost = process.env.REACT_APP_SERVER_HOST || "localhost";
 
 export default function Register() {
+
 
     let [submitted, setSubmitted] = useState(false);
     let [errors, setErrors] = useState([]);
@@ -32,11 +34,29 @@ export default function Register() {
     const politics = {};
     const orientation = {};
 
+
     const {register, handleSubmit, watch, control, setValue} = useForm();
     const onSubmit = data => {
-        const allData = {...data, interests, orientation, politics}
+        const allData = {...data, interests, orientation, politics};
 
-        fetch('http://localhost:3006/users', {
+        console.log(JSON.stringify({
+            firstName: allData.name,
+            email: allData.email,
+            passwordHash: allData.password,
+            age: parseInt(allData.age, 10),
+            gender: allData.gender,
+            orientation: Object.keys(allData.orientation),
+            profession: allData.profession,
+            hobbies: Object.keys(allData.interests),
+            politicalEconomics: allData.politics.economics,
+            politicalDiplomatic: allData.politics.diplomatic,
+            politicalCivil: allData.politics.civil,
+            politicalSocietal: allData.politics.societal
+        }));
+
+        console.log(222222222)
+
+        fetch("//" + serverHost + ":3006" + "/users", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,6 +81,7 @@ export default function Register() {
             .then(data => {
                     if (data.error) {
                         console.log(2);
+                        console.log(data)
                         setErrors(data.message)
                     } else {
                         console.log(3);
@@ -73,9 +94,7 @@ export default function Register() {
                 setSubmitted(true)
 
             })
-
     }
-
 
     return (
         <Container component="main" maxWidth="xs">
@@ -230,7 +249,6 @@ export default function Register() {
                         </Grid>
                     </Grid>
                 </form>
-
 
                 {errors.length > 1 ? errors.map((err, index) => (
                     <p style={{color: 'red'}} key={index}>{Object.values(err.constraints)}</p>

@@ -7,4 +7,5 @@ RUN npm i
 COPY . .
 
 EXPOSE 3006
-CMD ["node", "server.js"]
+CMD ["nest", "build"]
+CMD ["npm", "run", "start:prod"]

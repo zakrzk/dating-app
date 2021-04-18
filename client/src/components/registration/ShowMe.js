@@ -7,7 +7,6 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import '../../css/registration/ShowMe.css';
 import OrientationOption from "./OrientationOption";
 import {genderOptions} from 'gender-options';
-import Hobby from "./Hobby";
 
 const useStyles = makeStyles((theme) => ({
     root: {

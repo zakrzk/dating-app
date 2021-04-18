@@ -5,7 +5,6 @@ import {UserSchema} from './users/user.schema';
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken';
 const User = mongoose.model('User', UserSchema);
-let currentComments = [];
 
 const tempUser = "dbUser";
 const tempPassword = "KHpNtmTzzXvxSuAH";
