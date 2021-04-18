@@ -17,7 +17,6 @@ export const connectionString = `mongodb+srv://${tempUser}:${tempPassword}@${tem
 mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
 
 export const createUser = async user => {
-
     let hashedPass = await bcrypt.hash(user.passwordHash, 12);
     const docUser = new User({
         firstName: user.firstName,

@@ -1,4 +1,4 @@
-import {IsEmail, IsInt, IsNotEmpty, Length, Max, Min} from "class-validator";
+import {ArrayMinSize, IsEmail, IsInt, IsNotEmpty, Length, Max, Min} from "class-validator";
 
 export class UserDto {
     @IsNotEmpty()
@@ -21,6 +21,7 @@ export class UserDto {
     gender: string;
 
     @IsNotEmpty()
+    @ArrayMinSize(1)
     orientation: string[];
 
     @Length(2, 30)

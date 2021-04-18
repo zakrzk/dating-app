@@ -68,8 +68,6 @@ export default function PoliticalSpectrum(props) {
             label = event.target.parentNode.attributes[1].nodeValue
             props.onClick(label, value)
         }
-        console.log(label, value)
-
     };
 
         return (

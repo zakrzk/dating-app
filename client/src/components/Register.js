@@ -14,12 +14,13 @@ import '../css/Register.css';
 import ShowMe from "./registration/ShowMe";
 import PoliticalSpectrum from "./registration/PoliticalSpectrum";
 import {useForm, Controller} from "react-hook-form";
-import { Redirect } from "react-router";
+import {Redirect} from "react-router";
 
 
 export default function Register() {
 
-    const [submitted, setSubmitted] = useState(false);
+    let [submitted, setSubmitted] = useState(false);
+    let [errors, setErrors] = useState([]);
 
     const [gender, setGender] = React.useState('default');
     const handleGenderChange = (event) => {
@@ -31,21 +32,21 @@ export default function Register() {
     const politics = {};
     const orientation = {};
 
-    const {register, handleSubmit, watch, errors, control, setValue} = useForm();
+    const {register, handleSubmit, watch, control, setValue} = useForm();
     const onSubmit = data => {
         const allData = {...data, interests, orientation, politics}
 
         fetch('http://localhost:3006/users', {
             method: 'PUT',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             body: JSON.stringify({
                 firstName: allData.name,
                 email: allData.email,
                 passwordHash: allData.password,
-                age: allData.age,
+                age: parseInt(allData.age, 10),
                 gender: allData.gender,
                 orientation: Object.keys(allData.orientation),
                 profession: allData.profession,
@@ -56,10 +57,23 @@ export default function Register() {
                 politicalSocietal: allData.politics.societal
             })
         })
-            .catch(console.log)
+            .then(data => data.json())
+            .then(data => {
+                    if (data.error) {
+                        console.log(2);
+                        setErrors(data.message)
+                    } else {
+                        console.log(3);
+                        setSubmitted(true)
+                    }
+                }
+            )
+            .catch(err => {
+                console.log(err);
+                setSubmitted(true)
 
-        setSubmitted(true)
-        console.log(submitted);
+            })
+
     }
 
 
@@ -216,8 +230,14 @@ export default function Register() {
                         </Grid>
                     </Grid>
                 </form>
+
+
+                {errors.length > 1 ? errors.map((err, index) => (
+                    <p style={{color: 'red'}} key={index}>{Object.values(err.constraints)}</p>
+                )) : null}
+
             </div>
-            {submitted === true ? <Redirect to="/success" /> : null  }
+            {submitted === true ? <Redirect to="/success"/> : null}
         </Container>
 
     );
