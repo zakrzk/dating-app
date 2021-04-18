@@ -6,12 +6,12 @@ COPY package*.json ./
 RUN npm i
 #RUN npm i -g serve
 
-ARG REACT_APP_SERVER_HOST
-ENV REACT_APP_SERVER_HOST $REACT_APP_SERVER_HOST
+#ARG REACT_APP_SERVER_HOST
+#ENV REACT_APP_SERVER_HOST $REACT_APP_SERVER_HOST
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD ["npm", "run", "start"]
 #CMD ["serve", "-s", "build"]
