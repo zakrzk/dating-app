@@ -11,7 +11,7 @@ ENV REACT_APP_SERVER_HOST $REACT_APP_SERVER_HOST
 
 COPY . .
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["npm", "run", "start"]
 #CMD ["serve", "-s", "build"]
