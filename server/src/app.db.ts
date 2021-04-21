@@ -81,10 +81,10 @@ export const getMatchesFromDb = async (id1, id2) => {
     const hobbiesMergedFiltered = hobbiesMerged.filter(function (item, pos) {
         return hobbiesMerged.indexOf(item) == pos;
     })
-    const unionPower = hobbiesMergedFiltered.length;
-    const intersectionPower = User1Hobbies.length + User2Hobbies.length - unionPower
+    const unionCardinal = hobbiesMergedFiltered.length;
+    const intersectionCardinal = User1Hobbies.length + User2Hobbies.length - unionCardinal
 
-    const hobbyMatchLevel = Math.floor(intersectionPower / unionPower * 100)
+    const hobbyMatchLevel = Math.floor(intersectionCardinal / unionCardinal * 100)
 
     // Step 3: Calculate politics compass matching
 
