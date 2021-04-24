@@ -9,7 +9,7 @@ export const interests = {
             label: 'baseball',
         },
         {
-            symbol: '️🏏️',
+            symbol: '🏏️',
             label: 'cricket',
         },
         {

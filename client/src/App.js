@@ -1,6 +1,6 @@
 import './App.css';
 import 'fontsource-roboto';
-import {Header} from "./components/Header";
+import Header from "./components/Header";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Card from "./components/Card";
 import Register from "./components/Register";
@@ -24,11 +24,18 @@ function App() {
                         <h4>Please log in now:</h4>
                         <Login/>
                     </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
                     <Route path="/register">
                         <Register/>
                     </Route>
-                    <Route path="/">
+                    <Route path="/browse">
                         <Card/>
+                    </Route>
+
+                    <Route path="/">
+                        <Register/>
                     </Route>
                 </Switch>
             </BrowserRouter>

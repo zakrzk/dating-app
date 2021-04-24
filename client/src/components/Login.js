@@ -3,23 +3,19 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CreateIcon from '@material-ui/icons/Create';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
-import {genderOptions} from 'gender-options';
-import {MenuItem, Select} from "@material-ui/core";
-import Interests from "./registration/Interests";
 import '../css/Register.css';
-import ShowMe from "./registration/ShowMe";
-import PoliticalSpectrum from "./registration/PoliticalSpectrum";
 import {useForm, Controller} from "react-hook-form";
-import { Redirect } from "react-router";
+import {Redirect} from "react-router";
 
 
 export default function Login() {
 
     const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState(false);
+    const [jwt, setJwt] = useState({});
     const {register, handleSubmit, watch, errors, control, setValue} = useForm();
 
     const onSubmit = data => {
@@ -38,13 +34,19 @@ export default function Login() {
                 password: loginData.password,
             })
         })
+            .then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                if (data.err) {
+                    setError(data.err)
+                }
+                if(data.userId && data.token) {
+                    localStorage.setItem('JWT', JSON.stringify({userId: data.userId, token: data.token}));
+                    setJwt({userId: data.userId, token: data.token})
+                    setSubmitted(true)
+                }
+        })
             .catch(console.log)
-        console.log(loginData.email)
-        console.log(loginData.password)
-
-        setSubmitted(true)
-
-
     }
 
     return (
@@ -107,9 +109,12 @@ export default function Login() {
                     >
                         Sign Up
                     </Button>
+
                 </form>
+
+                {error ? <p style={{color: 'red'}}>{error}</p> : null}
             </div>
-            {submitted === true ? <Redirect to="/" /> : null  }
+            {submitted === true ? <Redirect to="/browse"/> : null}
         </Container>
 
     );

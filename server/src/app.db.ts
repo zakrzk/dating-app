@@ -4,6 +4,7 @@ import {BadRequestException} from '@nestjs/common';
 import {UserSchema} from './users/user.schema';
 import * as bcrypt from 'bcryptjs'
 import * as jwt from 'jsonwebtoken';
+
 const User = mongoose.model('User', UserSchema);
 
 const tempUser = "dbUser";
@@ -49,9 +50,15 @@ export const getAllUsersFromDb = () => {
     });
 };
 
-export const getMatchesFromDb = async (id1, id2) => {
+export const getUserById = async (id) => {
+    return User.findOne({_id: id},
+        function (err, user1) {
+            if (err) return new Error('User not found or invalid data given.');
+            return JSON.stringify(user1);
+        });
+}
 
-    console.log("GET /matches");
+export const getMatchesFromDb = async (id1, id2) => {
 
     const User1 = await User.findOne({_id: id1},
         function (err, user1) {
@@ -70,7 +77,8 @@ export const getMatchesFromDb = async (id1, id2) => {
     const User2Orientation = User2.orientation.map(_ => _.toLowerCase());
 
     if (!User2Orientation.includes(User1Gender)) {
-        return "Users are not interested in each others (sexual orientation) "
+        return 0;
+        // return "Users are not interested in each others (sexual orientation) "
     }
 
     // Step 2: Calculate number of total and shared hobbies
@@ -91,7 +99,6 @@ export const getMatchesFromDb = async (id1, id2) => {
     const User1Economics = User1.politicalEconomics;
     const User2Economics = User2.politicalEconomics;
 
-
     const User1Diplomatic = User1.politicalDiplomatic;
     const User2Diplomatic = User2.politicalDiplomatic;
 
@@ -101,24 +108,21 @@ export const getMatchesFromDb = async (id1, id2) => {
     const User1Societal = User1.politicalSocietal;
     const User2Societal = User2.politicalSocietal;
 
-    let economicsDifference = Math.abs(User1Economics, User2Economics)
-    let economicsMatch = (10 - economicsDifference) / 10 // 0.5
+    let economicsDifference = Math.abs(User1Economics - User2Economics); // i.e. |(-3) - (+2)|
+    let economicsMatch = (10 - economicsDifference) / 10;
 
-    let diplomaticDifference = Math.abs(User1Diplomatic, User2Diplomatic) //5
-    let diplomaticMatch = (10 - diplomaticDifference) / 10 // 0.5
+    let diplomaticDifference = Math.abs(User1Diplomatic - User2Diplomatic);
+    let diplomaticMatch = (10 - diplomaticDifference) / 10;
 
-    let civilDifference = Math.abs(User1Civil, User2Civil) // 2
-    let civilMatch = (10 - civilDifference) / 10 // 0.8
+    let civilDifference = Math.abs(User1Civil - User2Civil);
+    let civilMatch = (10 - civilDifference) / 10;
 
-    let societalDifference = Math.abs(User1Societal, User2Societal) // 9
-    let societalMatch = (10 - societalDifference) / 10 // 0.1
+    let societalDifference = Math.abs(User1Societal - User2Societal);
+    let societalMatch = (10 - societalDifference) / 10;
 
-    let politicsMatchLevel = (economicsMatch + diplomaticMatch + civilMatch + societalMatch) / 4 * 100
-
-    console.log("Politics Match: " + politicsMatchLevel + "%")
-
-    const finalMatchLevel = Math.ceil((hobbyMatchLevel * 0.7) + (politicsMatchLevel * 0.3))
-    return ("Final Match: " + finalMatchLevel + "%")
+    let politicsMatchLevel = (economicsMatch + diplomaticMatch + civilMatch + societalMatch) / 4 * 100;
+    const finalMatchLevel = Math.floor((hobbyMatchLevel * 0.7) + (politicsMatchLevel * 0.3));
+    return finalMatchLevel;
 
 };
 
@@ -126,23 +130,25 @@ export const getMatchesFromDb = async (id1, id2) => {
 export const loginUserViaDb = async (email, passwordFromLoginForm) => {
 
     console.log("POST /users");
-
+    if (!email || !passwordFromLoginForm) {
+        return {err: "missing email or password"}
+    }
     let tempUser;
 
     const user = await User.findOne({email: email},
         function (err, user) {
-            if (err) return new Error('User not found or invalid data given.');
+            if (err) return {err: 'User not found or invalid data given.'};
             return JSON.stringify(user);
         });
 
     tempUser = user;
 
-    console.log(user.passwordHash)
-    console.log(passwordFromLoginForm)
-
+    if (!user) {
+        return {err: "email not registered"}
+    }
 
     if (!user.passwordHash || !passwordFromLoginForm) {
-        return "Invalid data given"
+        return {err: "Invalid data given"}
     }
 
     return await bcrypt.compare(passwordFromLoginForm, user.passwordHash)

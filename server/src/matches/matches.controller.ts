@@ -1,19 +1,22 @@
-import {Body, Controller, Get} from '@nestjs/common';
+import {Body, Controller, Get, Headers} from '@nestjs/common';
 import {MatchesService} from './matches.service';
+import * as jwt from 'jsonwebtoken';
+
 
 @Controller('matches')
 
 export class MatchesController {
     constructor(private readonly matchesService: MatchesService) {
-
     }
 
     @Get()
     async getMatch(
-        @Body('id1') UserId1: string,
-        @Body('id2') UserId2: string,
+        @Headers('Authorization') bearer: string
     ): Promise<any> {
-        return this.matchesService.getMatches(UserId1, UserId2);
-
+        const token = bearer.substring(7); // delete "Bearer " to get only the value
+        const decoded = jwt.verify(token, "my_jwt_secret"); // verify token's authenticity
+        console.log("decoded");
+        console.log(JSON.stringify(decoded));
+        return this.matchesService.getMatches(decoded.userId);
     }
 }
