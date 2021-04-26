@@ -8,11 +8,12 @@ import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
 import '../css/Register.css';
 import {useForm, Controller} from "react-hook-form";
-import {Redirect} from "react-router";
+import {Redirect, useHistory} from "react-router";
 
 
 export default function Login() {
 
+    const history = useHistory();
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
     const [jwt, setJwt] = useState({});
@@ -44,6 +45,7 @@ export default function Login() {
                     localStorage.setItem('JWT', JSON.stringify({userId: data.userId, token: data.token}));
                     setJwt({userId: data.userId, token: data.token})
                     setSubmitted(true)
+                    history.push('/browse');
                 }
         })
             .catch(console.log)
@@ -114,7 +116,8 @@ export default function Login() {
 
                 {error ? <p style={{color: 'red'}}>{error}</p> : null}
             </div>
-            {submitted === true ? <Redirect to="/browse"/> : null}
+
+            {/*{submitted === true ? <Redirect to="/browse"/> : null}*/}
         </Container>
 
     );

@@ -10,8 +10,8 @@ import Login from "./components/Login";
 function App() {
     return (
         <div className="App">
-            <Header/>
             <BrowserRouter>
+                <Header/>
                 <Switch>
                     <Route path="/profile">
                         <h2>My Profile</h2>

@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 function Card() {
 
     const [users, setUsers] = useState([]);
-    const token = JSON.parse(localStorage.getItem('JWT')).token;
+    const token = JSON.parse(localStorage.getItem('JWT'))?.token;
     let bearer = 'Bearer ' + token;
 
     useEffect(() => {
