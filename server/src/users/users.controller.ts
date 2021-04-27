@@ -35,6 +35,7 @@ export class UsersController {
         );
     }
 
+    // This should not be exposed to public in production!
     @Get()
     getUsers() {
         return this.usersService.getUsers();

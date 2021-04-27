@@ -42,7 +42,7 @@ export const createUser = async user => {
 };
 
 export const getAllUsersFromDb = () => {
-
+    // This should not be exposed to public in production!
     return User.find(function (err, users) {
         if (err) throw new BadRequestException('Server error.');
         console.log('GET /users');
