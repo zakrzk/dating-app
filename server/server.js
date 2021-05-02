@@ -9,7 +9,7 @@ import {Hobby} from "./models/hobby.model.js";
 
 const app = express();
 import authRoutes from './routes/auth.routes'
-const PORT = process.env.SERVER_PORT || 3006;
+const PORT = process.env.SERVER_PORT || 3008;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

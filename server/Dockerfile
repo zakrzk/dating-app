@@ -6,6 +6,6 @@ COPY package*.json ./
 RUN npm i
 COPY . .
 
-EXPOSE 3006
+EXPOSE 3008
 CMD ["nest", "build"]
 CMD ["npm", "run", "start:prod"]
