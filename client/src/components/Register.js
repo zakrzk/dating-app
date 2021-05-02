@@ -16,7 +16,7 @@ import PoliticalSpectrum from "./registration/PoliticalSpectrum";
 import {useForm, Controller} from "react-hook-form";
 import {Redirect} from "react-router";
 
-export let serverHost = process.env.REACT_APP_SERVER_HOST || "localhost";
+export let serverHost = process.env.REACT_APP_SERVER_HOST || "dating-app-fyp.codes";
 
 export default function Register() {
 
@@ -54,7 +54,6 @@ export default function Register() {
             politicalSocietal: allData.politics.societal
         }));
 
-        console.log(222222222)
 
         fetch("//" + serverHost + ":3006" + "/users", {
             method: 'PUT',
