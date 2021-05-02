@@ -4,14 +4,15 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm i
-#RUN npm i -g serve
+RUN npm i -g serve
 
 #ARG REACT_APP_SERVER_HOST
 #ENV REACT_APP_SERVER_HOST $REACT_APP_SERVER_HOST
 
 COPY . .
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
-#CMD ["serve", "-s", "build"]
+#CMD ["npm", "run", "start"]
+CMD ["serve", "-s", "build"]
