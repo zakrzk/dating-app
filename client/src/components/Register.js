@@ -16,7 +16,7 @@ import PoliticalSpectrum from "./registration/PoliticalSpectrum";
 import {useForm, Controller} from "react-hook-form";
 import {Redirect} from "react-router";
 
-export let serverHost = process.env.REACT_APP_SERVER_HOST || "dating-app-fyp.codes";
+export let serverHost = process.env.REACT_APP_SERVER_HOST || "https://dating-app-fyp.codes";
 
 export default function Register() {
 

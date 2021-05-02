@@ -24,7 +24,7 @@ services:
     restart: always
     build: ./server
     ports:
-      - ${SERVER_PORT}:3006
+      - ${SERVER_PORT}:3008
     networks:
       - app-network
 
