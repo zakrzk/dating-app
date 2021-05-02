@@ -1,0 +1,64 @@
+Sun, 2 May 2021 04:45:25 +0200,Bartek Zakrzewski,add SSL to backend
+Sun, 2 May 2021 04:17:49 +0200,Bartek Zakrzewski,enable SSL on server
+Sun, 2 May 2021 04:11:31 +0200,Bartek Zakrzewski,install ssl on port 3006
+Sun, 2 May 2021 03:58:17 +0200,Bartek Zakrzewski,change env URL
+Sun, 2 May 2021 03:36:01 +0200,Bartek Zakrzewski,switch client in production env
+Sun, 2 May 2021 03:35:31 +0200,Bartek Zakrzewski,create README file
+Sun, 2 May 2021 03:35:22 +0200,Bartek Zakrzewski,clear docker-compose file
+Wed, 28 Apr 2021 00:38:24 +0200,Bartek Zakrzewski,TODO: block GET on /users from public access
+Tue, 27 Apr 2021 00:40:06 +0200,Bartek Zakrzewski,fix showing if user is logged
+Mon, 26 Apr 2021 02:28:22 +0200,Bartek Zakrzewski,WIP: update header with login info
+Sun, 25 Apr 2021 01:54:38 +0200,Bartek Zakrzewski,implement JWT verification, add login feature, show only matching users
+Wed, 21 Apr 2021 13:22:13 +0200,Bartek Zakrzewski,fix typo (power -> cardinality)
+Sun, 18 Apr 2021 22:47:18 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 22:40:58 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 22:35:13 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 22:32:11 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 22:30:29 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 20:17:04 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 20:00:52 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 19:39:28 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 19:14:14 +0200,Bartek Zakrzewski,WIP: deploy to aws
+Sun, 18 Apr 2021 02:27:11 +0200,Bartek Zakrzewski,implement frontend validation
+Sun, 18 Apr 2021 01:04:54 +0200,Bartek Zakrzewski,add validationpipe
+Sun, 18 Apr 2021 00:57:39 +0200,Bartek Zakrzewski,fix server side validation using a class-validator
+Sat, 17 Apr 2021 22:34:27 +0200,Bartek Zakrzewski,fix bug with range sliders, add redirection to /success
+Sat, 17 Apr 2021 16:20:24 +0200,Bartek Zakrzewski,clear logs for GET /matches
+Sat, 17 Apr 2021 13:46:21 +0200,Bartek Zakrzewski,implement matching formula
+Sat, 17 Apr 2021 01:25:43 +0200,Bartek Zakrzewski,connect client with server using fetch, install cors
+Fri, 16 Apr 2021 01:32:45 +0200,Bartek Zakrzewski,add PoliticalAxes to object on submit
+Thu, 15 Apr 2021 22:46:23 +0200,Bartek Zakrzewski,add Orientation to returned Object
+Wed, 14 Apr 2021 02:33:34 +0200,Bartek Zakrzewski,add new test
+Wed, 14 Apr 2021 02:12:56 +0200,Bartek Zakrzewski,create firsts tests
+Wed, 14 Apr 2021 00:25:22 +0200,Bartek Zakrzewski,before jest-mongodb
+Tue, 13 Apr 2021 23:53:00 +0200,Bartek Zakrzewski,pass User as a single object
+Tue, 13 Apr 2021 19:42:30 +0200,Bartek Zakrzewski,before fastify
+Mon, 12 Apr 2021 20:01:15 +0200,Bartek Zakrzewski,WIP: write unit test for User endpoint
+Mon, 12 Apr 2021 16:18:24 +0200,Bartek Zakrzewski,improve User create validation
+Mon, 12 Apr 2021 16:11:44 +0200,Bartek Zakrzewski,add validation for creating User
+Mon, 12 Apr 2021 15:29:30 +0200,Bartek Zakrzewski,create an endpoint for creating new User
+Mon, 12 Apr 2021 12:43:08 +0200,Bartek Zakrzewski,save changes before installing nest
+Sun, 11 Apr 2021 22:08:31 +0200,Bartek Zakrzewski,wip: fix issues with .js
+Fri, 9 Apr 2021 16:54:14 +0200,Bartek Zakrzewski,add dummy user data
+Fri, 9 Apr 2021 16:01:29 +0200,Bartek Zakrzewski,share context, log user object
+Wed, 31 Mar 2021 17:31:23 +0200,Bartek Zakrzewski,WIP: share context between components
+Wed, 31 Mar 2021 02:54:53 +0200,Bartek Zakrzewski,align ShowMe options
+Wed, 31 Mar 2021 00:27:57 +0200,Bartek Zakrzewski,add select input for showMe
+Tue, 30 Mar 2021 01:59:12 +0200,Bartek Zakrzewski,add descriptions of the axis;
+Tue, 30 Mar 2021 01:37:02 +0200,Bartek Zakrzewski,add political spectrum
+Tue, 30 Mar 2021 01:19:53 +0200,Bartek Zakrzewski,create PoliticalSpectrum component
+Tue, 30 Mar 2021 01:08:58 +0200,Bartek Zakrzewski,change chip color"
+Tue, 30 Mar 2021 01:06:03 +0200,Bartek Zakrzewski,change Chip color and attribute isClicked on click
+Tue, 30 Mar 2021 00:29:48 +0200,Bartek Zakrzewski,render all interests with one function
+Mon, 29 Mar 2021 20:19:33 +0200,Bartek Zakrzewski,export hobbies to JSON
+Mon, 29 Mar 2021 02:18:05 +0200,Bartek Zakrzewski,WIP: registration form
+Sat, 27 Mar 2021 23:16:38 +0100,Bartek Zakrzewski,WIP: registration form
+Sat, 27 Mar 2021 20:17:19 +0100,Bartek Zakrzewski,delete proxy from package.json
+Sat, 27 Mar 2021 19:26:40 +0100,Bartek Zakrzewski,deploy to ec2
+Fri, 26 Mar 2021 21:13:02 +0100,Bartek Zakrzewski,add swipe support, change fonts
+Fri, 26 Mar 2021 18:10:11 +0100,Bartek Zakrzewski,install Material UI
+Fri, 26 Mar 2021 17:23:35 +0100,Bartek Zakrzewski,clean css
+Sat, 2 Jan 2021 18:25:51 +0100,Bartek Zakrzewski,WIP: fetch data from database
+Sat, 2 Jan 2021 17:51:55 +0100,Bartek Zakrzewski,dockerize app
+Sat, 2 Jan 2021 03:04:51 +0100,Bartek Zakrzewski,create API, create component and fetch data from the API
+Sat, 2 Jan 2021 01:35:35 +0100,Bartek Zakrzewski,initial commit, install react app

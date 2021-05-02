@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import '../css/Register.css';
 import {useForm, Controller} from "react-hook-form";
 import {Redirect, useHistory} from "react-router";
+import {serverHost} from "./Register";
 
 
 export default function Login() {
@@ -24,7 +25,7 @@ export default function Login() {
 
         console.log(data)
 
-        fetch('http://localhost:3006/users/', {
+        fetch("//" + serverHost + ":3006" + "/users", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -38,15 +39,15 @@ export default function Login() {
             .then(function (response) {
                 return response.json();
             }).then(function (data) {
-                if (data.err) {
-                    setError(data.err)
-                }
-                if(data.userId && data.token) {
-                    localStorage.setItem('JWT', JSON.stringify({userId: data.userId, token: data.token}));
-                    setJwt({userId: data.userId, token: data.token})
-                    setSubmitted(true)
-                    history.push('/browse');
-                }
+            if (data.err) {
+                setError(data.err)
+            }
+            if (data.userId && data.token) {
+                localStorage.setItem('JWT', JSON.stringify({userId: data.userId, token: data.token}));
+                setJwt({userId: data.userId, token: data.token})
+                setSubmitted(true)
+                history.push('/browse');
+            }
         })
             .catch(console.log)
     }
